@@ -12,6 +12,10 @@
 # My screen resolution
 # xrandr --rate 120
 
+xrandr --output DP-1 --primary --rate 100 --mode 3840x2160
+xrandr --output DP-3 --right-of DP-1 --rate 100 --mode 1920x1080
+xrandr --output DP-2 --left-of DP-1 --rate 100 --mode 2560x1440
+
 # For Virtual Machine 
 # xrandr --output Virtual-1 --mode 1920x1080
 

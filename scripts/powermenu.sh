@@ -24,7 +24,8 @@ case $choice in
 	$option1)
 		slock ;;
 	$option2)
-		qtile cmd-obj -o cmd -f shutdown ;;
+		# qtile cmd-obj -o cmd -f shutdown ;;
+		loginctl kill-session ${XDG_SESSION_ID-}
 	$option3)
 		systemctl reboot ;;
 	$option4)

@@ -54,12 +54,15 @@ mod = "mod4" # SUPER KEY
 
 keys = [
 
-    # Focus
-    Key([mod], "Left", lazy.layout.left(), desc="Move focus to left"),
-    Key([mod], "Right", lazy.layout.right(), desc="Move focus to right"),
-    Key([mod], "Down", lazy.layout.down(), desc="Move focus down"),
+    # Focus    
     Key([mod], "Up", lazy.layout.up(), desc="Move focus up"),
-    Key([mod], "space", lazy.layout.next(), desc="Move window focus to other window around"),
+    Key([mod], "Down", lazy.layout.down(), desc="Move focus to right"),
+    Key([mod], "Left", lazy.layout.left(), desc="Move focus to left" ),
+    Key([mod], "Right", lazy.layout.right(), desc="Move focus to right"),
+    Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
+    Key([mod], "j", lazy.layout.down(), desc="Move focus to right"),
+    Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
+    Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
     
     # Move
     Key([mod, "shift"], "Left", lazy.layout.shuffle_left(), desc="Move window to the left"),
