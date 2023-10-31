@@ -55,7 +55,8 @@
         "custom/cliphist",
         "network",
         "custom/exit",
-        "clock"
+        "clock",
+        "keyboard-state"
     ],
 
     // Group Quicklinks

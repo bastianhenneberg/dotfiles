@@ -56,6 +56,14 @@
         "separate-outputs": true
     },
 
+    // Hyprland Keyboard Language 
+    "hyprland/language": {
+      "format": "{}",
+      "format-en": "English",
+      "format-de": "Deutsch",
+      "keyboard-name": "zmk-project-corne-view-keyboard"
+    },
+
     // Youtube Subscriber Count
     "custom/youtube": {
         "format": " {}",

@@ -48,6 +48,7 @@
     // Modules Right    
     "modules-right": [
         "custom/updates",
+        "hyprland/language", 
         "pulseaudio",
         "bluetooth",
         "battery", 
@@ -55,7 +56,7 @@
         "custom/cliphist",
         "network",
         "custom/exit",
-        "clock"
+        "clock",
     ],
 
     // Group Quicklinks
