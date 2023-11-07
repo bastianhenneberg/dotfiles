@@ -42,12 +42,9 @@ require('lspconfig').emmet_ls.setup({
   filetypes = { 'html', 'blade', 'php'}
 })
 
+
 -- Astro
-require('lspconfig').astro.setup({
-  init_options = { on_attach = on_attach, capabilities = capabilities, configuration = {},
-    typescript = {
-      serverPath = '~/.nvm/versions/node/v20.1.0/lib/node_modules/typescript/lib/tsserverlibrary.js.js'}, },
-})
+-- require('lspconfig').astro.setup { init_options = { on_attach = on_attach, capabilities = capabilities, configuration = {}, typescript = { serverPath = vim.fs.normalize '~/.nvm/versions/node/v20.9.0/lib/node_modules/typescript/lib/tsserverlibrary.js', }, }, }
 
 -- Plugins
 lvim.plugins = {
