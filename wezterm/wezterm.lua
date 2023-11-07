@@ -20,7 +20,7 @@ config.color_scheme = 'Dracula'
 config.font_size = 12
 config.line_height = 1.5
 config.cell_width = 1.03
-config.font = wezterm.font('FiraCode Nerd Font Mono', { weight = 'Medium', italic = false})
+config.font = wezterm.font('FiraCode Nerd Font', { weight = 'Medium', italic = false})
 config.window_decorations = "NONE"
 config.window_padding = {
   left = '5px',
