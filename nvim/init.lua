@@ -74,6 +74,7 @@ require('lazy').setup({
   -- Git related plugins
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
+  'Mofiqul/dracula.nvim',
 
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
@@ -171,7 +172,7 @@ require('lazy').setup({
     opts = {
       options = {
         icons_enabled = false,
-        theme = 'onedark',
+        theme = 'dracula-nvim',
         component_separators = '|',
         section_separators = '',
       },
@@ -238,6 +239,8 @@ require('lazy').setup({
 -- [[ Setting options ]]
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
+
+vim.cmd[[colorscheme dracula]]
 
 -- Set highlight on search
 vim.o.hlsearch = false
