@@ -248,6 +248,11 @@ vim.o.hlsearch = false
 -- Relative line numbers
 vim.o.relativenumber = true
 
+-- Tabstops 
+vim.opt.tabstop = 8 -- Always 8 (see :h tabstop)
+vim.opt.softtabstop = 2 -- What you expecting
+vim.opt.shiftwidth = 2 -- What you expecting
+
 -- Make line numbers default
 vim.wo.number = true
 
