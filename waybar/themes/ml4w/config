@@ -22,7 +22,6 @@
     // "margin-bottom": 14,
     
     "layer": "top",
-    "height": 16,
     "margin-left": 0,
     "margin-right": 0,    
     "spacing": 0,
@@ -33,10 +32,12 @@
     // Modules Left
     "modules-left": [
         "custom/appmenu",
+        "custom/settings",
+        "custom/waybarthemes",
         "custom/wallpaper",
-        "custom/waybarthemes",          
-        "custom/settings",          
+        // START TASK TOOGLE
         "wlr/taskbar",
+        // END TASK TOOGLE
         "group/quicklinks",
         "hyprland/window"
     ],
@@ -50,31 +51,18 @@
     "modules-right": [
         "custom/updates",
         "pulseaudio",
+        // START BT TOOGLE
         "bluetooth",
+        // END BT TOOGLE
         "battery", 
+        "network",
         "group/hardware",
         "custom/cliphist",
-        "network",
+        "idle_inhibitor",
+        // START TRAY TOOGLE
+        "tray",
+        // END TRAY TOOGLE
         "custom/exit",
         "clock"
-    ],
-
-    // Group Quicklinks
-    "group/quicklinks": {
-        "orientation": "horizontal",
-        "modules": [
-            "custom/filemanager",
-            "custom/browser"
-         ]
-    },
-
-    // Group Hardware
-    "group/hardware": {
-        "orientation": "horizontal",
-        "modules": [
-            "disk",
-            "cpu",
-            "memory"
-        ]
-    }
+    ]
 }

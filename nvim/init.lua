@@ -1,5 +1,4 @@
 --[[
-
 =====================================================================
 ==================== READ THIS BEFORE CONTINUING ====================
 =====================================================================
@@ -114,7 +113,7 @@ require('lazy').setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim', opts = {} },
+  { 'folke/which-key.nvim',  opts = {} },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -171,7 +170,8 @@ require('lazy').setup({
     opts = {
       options = {
         icons_enabled = false,
-        theme = 'dracula-nvim',
+        theme = 'dracula',
+        -- theme = 'tokyonight',
         component_separators = '|',
         section_separators = '',
       },
@@ -218,6 +218,24 @@ require('lazy').setup({
       'nvim-treesitter/nvim-treesitter-textobjects',
     },
     build = ':TSUpdate',
+    config = function()
+      local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
+      parser_config.blade = {
+        install_info = {
+          url = "https://github.com/EmranMR/tree-sitter-blade",
+          files = { "src/parser.c" },
+          branch = "main",
+        },
+        filetype = "blade"
+      }
+      -- in my settings
+      -- Filetypes --
+      vim.filetype.add({
+        pattern = {
+          ['.*%.blade%.php'] = 'blade',
+        },
+      })
+    end,
   },
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
@@ -232,7 +250,7 @@ require('lazy').setup({
   --    Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   --
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
- { import = 'custom.plugins'},
+  { import = 'custom.plugins' },
 }, {})
 
 -- [[ Setting options ]]
@@ -245,13 +263,6 @@ require('lazy').setup({
 -- Set highlight on search
 vim.o.hlsearch = false
 
--- Relative line numbers
-vim.o.relativenumber = true
-
--- Tabstops 
-vim.opt.tabstop = 8 -- Always 8 (see :h tabstop)
-vim.opt.softtabstop = 2 -- What you expecting
-vim.opt.shiftwidth = 2 -- What you expecting
 
 -- Make line numbers default
 vim.wo.number = true
@@ -360,7 +371,7 @@ local function live_grep_git_root()
   local git_root = find_git_root()
   if git_root then
     require('telescope.builtin').live_grep({
-      search_dirs = {git_root},
+      search_dirs = { git_root },
     })
   end
 end
@@ -531,7 +542,7 @@ local servers = {
   -- pyright = {},
   -- rust_analyzer = {},
   -- tsserver = {},
-  -- html = { filetypes = { 'html', 'twig', 'hbs'} },
+   html = { filetypes = { 'html', 'twig', 'hbs', 'blade'} },
 
   lua_ls = {
     Lua = {
@@ -616,3 +627,7 @@ cmp.setup {
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+
+require("options")
+
+require'luasnip'.filetype_extend("blade", {"html"})

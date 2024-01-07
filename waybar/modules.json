@@ -20,8 +20,10 @@
 			"active": "",
 			"default": ""
         },
-        "persistent_workspaces": {
-             "*": 5
+        "persistent-workspaces": {
+            // START WORKSPACES
+    "*": 5
+            // END WORKSPACES
         }       
     },
 
@@ -83,6 +85,7 @@
         "exec": "~/dotfiles/scripts/updates.sh",
         "restart-interval": 60,
         "on-click": "alacritty -e ~/dotfiles/scripts/installupdates.sh",
+        "on-click-right": "~/dotfiles/.settings/software.sh",
         "tooltip": false
     },
     
@@ -104,7 +107,7 @@
     // Settings
     "custom/settings": {
         "format": "",
-        "on-click": "alacritty --class dotfiles-floating -e ~/dotfiles/hypr/settings/settings.sh",
+        "on-click": "alacritty --class dotfiles-floating -e ~/dotfiles/hypr/start-settings.sh",
         "tooltip": false
     },
 
@@ -118,7 +121,7 @@
     // Filemanager Launcher
     "custom/filemanager": {
         "format": "",
-        "on-click": "thunar",
+        "on-click": "~/dotfiles/.settings/filemanager.sh",
         "tooltip": false
     },
 
@@ -139,7 +142,7 @@
     // Browser Launcher
     "custom/browser": {
         "format": "",
-        "on-click": "chromium",
+        "on-click": "~/dotfiles/.settings/browser.sh",
         "tooltip": false
     },    
 
@@ -166,7 +169,9 @@
 
     // Rofi Application Launcher
     "custom/appmenu": {
+        // START APPS LABEL
         "format": "Apps",
+        // END APPS LABEL
         "on-click": "rofi -show drun -replace",
         "on-click-right": "~/dotfiles/hypr/scripts/keybindings.sh",
         "tooltip": false
@@ -192,7 +197,7 @@
 
     // System tray
     "tray": {
-        // "icon-size": 21,
+        "icon-size": 21,
         "spacing": 10
     },
 
@@ -200,7 +205,15 @@
     "clock": {
         // "timezone": "America/New_York",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        // START CLOCK FORMAT
         "format-alt": "{:%Y-%m-%d}"
+        // END CLOCK FORMAT
+    },
+
+    // System
+    "custom/system": {
+        "format": "",
+        "tooltip": false
     },
 
     // CPU
@@ -218,11 +231,56 @@
     // Harddisc space used
     "disk": {
         "interval": 30,
-        "format": "   {percentage_used}% ",
+        "format": "D {percentage_used}% ",
         "path": "/",
         "on-click": "alacritty -e htop"
     }, 
+
+    "hyprland/language": {
+        "format": "/ K {short}"
+    },
+
+    // Group Hardware
+    "group/hardware": {
+        "orientation": "inherit",
+        "drawer": {
+            "transition-duration": 300,
+            "children-class": "not-memory",
+            "transition-left-to-right": false
+        },        
+        "modules": [
+            "custom/system",
+            "disk",
+            "cpu",
+            "memory",
+            "hyprland/language"
+        ]
+    },
     
+    // Group Settings
+    "group/settings": {
+        "orientation": "inherit",
+        "drawer": {
+            "transition-duration": 300,
+            "children-class": "not-memory",
+            "transition-left-to-right": false
+        },        
+        "modules": [
+            "custom/settings",
+            "custom/waybarthemes",
+            "custom/wallpaper"
+        ]
+    },
+
+    // Group Quicklinks
+    "group/quicklinks": {
+        "orientation": "horizontal",
+        "modules": [
+            "custom/filemanager",
+            "custom/browser"
+         ]
+    },
+
     // Network
     "network": {
         "format": "{ifname}",
@@ -234,7 +292,7 @@
         "tooltip-format-ethernet": "  {ifname} ({ipaddr}/{cidr})",
         "tooltip-format-disconnected": "Disconnected",
         "max-length": 50,
-        "on-click": "alacritty -e nmtui"
+        "on-click": "~/dotfiles/.settings/networkmanager.sh"
     },
 
     // Battery
@@ -276,6 +334,7 @@
 
     // Bluetooth
     "bluetooth": {
+        "format": " {status}",
         "format-disabled": "",
         "format-off": "",
         "interval": 30,
@@ -287,5 +346,14 @@
         "format": "{user}",
         "interval": 60,
         "icon": false,
+    },
+
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "tooltip": false,
+        "format-icons":{
+            "activated": "Auto lock OFF",
+            "deactivated": "ON"
+        }
     }
 }

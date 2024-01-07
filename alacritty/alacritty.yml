@@ -20,7 +20,6 @@
 #import:
 #  - /path/to/alacritty.yml
 
-
 # Any items in the `env` entry below will be added as
 # environment variables. Some entries may override variables
 # set by alacritty itself.
@@ -57,8 +56,8 @@ window:
   # Blank space added around the window in pixels. This padding is scaled
   # by DPI and the specified value is always added at both opposing sides.
   padding:
-    x: 5
-    y: 5
+    x: 15
+    y: 15
 
   # Spread additional padding evenly around the terminal content.
   #dynamic_padding: false
@@ -78,7 +77,7 @@ window:
   #
   # Window opacity as a floating point number from `0.0` to `1.0`.
   # The value `0.0` is completely transparent and `1.0` is opaque.
-  opacity: 0.9
+  opacity: 0.7
 
   # Startup Mode (changes require restart)
   #
@@ -168,21 +167,21 @@ font:
     #style: Bold Italic
 
   # Point size
-  size: 7.0
+  size: 12.0
 
   # Offset is the extra space around each character. `offset.y` can be thought
-  # of as modifying the line spacing, and `##offset.x` as modifying the letter
+  # of as modifying the line spacing, and `offset.x` as modifying the letter
   # spacing.
   #offset:
-  # x: 0
-  # y: 0
+  #  x: 0
+  #  y: 0
 
   # Glyph offset determines the locations of the glyphs within their cells with
   # the default being at the bottom. Increasing `x` moves the glyph to the
   # right, increasing `y` moves the glyph upward.
   #glyph_offset:
-  # x: 0
-  # y: 0
+  #  x: 0
+  #  y: 0
 
   # Use built-in font for box drawing characters.
   #
@@ -395,14 +394,14 @@ font:
 
 #cursor:
   # Cursor style
-  style:
+  #style:
     # Cursor shape
     #
     # Values for `shape`:
     #   - ▇ Block
     #   - _ Underline
     #   - | Beam
-    shape: Block
+    #shape: Block
 
     # Cursor blinking state
     #
@@ -411,7 +410,7 @@ font:
     #   - Off: Disable blinking by default
     #   - On: Enable blinking by default
     #   - Always: Force the cursor to always blink
-    blinking: on
+    #blinking: Off
 
   # Vi mode cursor style
   #
@@ -422,12 +421,12 @@ font:
   #vi_mode_style: None
 
   # Cursor blinking interval in milliseconds.
-  blink_interval: 750
+  #blink_interval: 750
 
   # Time after which cursor stops blinking, in seconds.
   #
   # Specifying '0' will disable timeout for blinking.
-  blink_timeout: 5
+  #blink_timeout: 5
 
   # If this is `true`, the cursor will be rendered as a hollow box when the
   # window is not focused.
@@ -904,56 +903,3 @@ font:
 
   # Highlight window damage information.
   #highlight_damage: false
-colors:
-  primary:
-    background: '#282a36'
-    foreground: '#f8f8f2'
-    bright_foreground: '#ffffff'
-  cursor:
-    text: CellBackground
-    cursor: CellForeground
-  vi_mode_cursor:
-    text: CellBackground
-    cursor: CellForeground
-  search:
-    matches:
-      foreground: '#44475a'
-      background: '#50fa7b'
-    focused_match:
-      foreground: '#44475a'
-      background: '#ffb86c'
-    footer_bar:
-      background: '#282a36'
-      foreground: '#f8f8f2'
-  hints:
-    start:
-      foreground: '#282a36'
-      background: '#f1fa8c'
-    end:
-      foreground: '#f1fa8c'
-      background: '#282a36'
-  line_indicator:
-    foreground: None
-    background: None
-  selection:
-    text: CellForeground
-    background: '#44475a'
-  normal:
-    black: '#21222c'
-    red: '#ff5555'
-    green: '#50fa7b'
-    yellow: '#f1fa8c'
-    blue: '#bd93f9'
-    magenta: '#ff79c6'
-    cyan: '#8be9fd'
-    white: '#f8f8f2'
-  bright:
-    black: '#6272a4'
-    red: '#ff6e6e'
-    green: '#69ff94'
-    yellow: '#ffffa5'
-    blue: '#d6acff'
-    magenta: '#ff92df'
-    cyan: '#a4ffff'
-    white: '#ffffff'
-theme: Dracula

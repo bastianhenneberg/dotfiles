@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #  ____  _             _    __        __          _                 
 # / ___|| |_ __ _ _ __| |_  \ \      / /_ _ _   _| |__   __ _ _ __  
 # \___ \| __/ _` | '__| __|  \ \ /\ / / _` | | | | '_ \ / _` | '__| 
@@ -38,4 +38,19 @@ fi
 # ----------------------------------------------------- 
 # Loading the configuration
 # ----------------------------------------------------- 
-waybar -c ~/dotfiles/waybar/themes${arrThemes[0]}/config -s ~/dotfiles/waybar/themes${arrThemes[1]}/style.css &
+config_file="config"
+style_file="style.css"
+
+# Standard files can be overwritten with an existing config-custom or style-custom.css
+if [ -f ~/dotfiles/waybar/themes${arrThemes[0]}/config-custom ] ;then
+    config_file="config-custom"
+fi
+if [ -f ~/dotfiles/waybar/themes${arrThemes[1]}/style-custom.css ] ;then
+    style_file="style-custom.css"
+fi
+
+# Check used files
+echo "Config: $config_file"
+echo "Style: $style_file"
+
+waybar -c ~/dotfiles/waybar/themes${arrThemes[0]}/$config_file -s ~/dotfiles/waybar/themes${arrThemes[1]}/$style_file &
