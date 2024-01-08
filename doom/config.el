@@ -186,3 +186,8 @@
  :config
  (setq undo-fu-session-compression nil)
  )
+
+(use-package org-excalidraw
+  :config
+  (setq org-excalidraw-directory "~/Documents/org/excalidraw")
+)

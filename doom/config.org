@@ -26,6 +26,7 @@
 - [[#terminals][Terminals]]
   - [[#multi-vterm][Multi-Vterm]]
 - [[#undo-fu][Undo Fu]]
+- [[#excalidraw][Excalidraw]]
 
 * Important Programms to Load first
 ** Adding the scripts directory to path
@@ -280,4 +281,13 @@ Display the actual color as a background for any hex color value (ex. #ffffff). 
     :config
     (setq undo-fu-session-compression nil)
     )
+#+end_src
+
+* Excalidraw
+#+begin_src emacs-lisp
+(use-package org-excalidraw
+  :config
+  (setq org-excalidraw-directory "~/Documents/org/excalidraw")
+)
+
 #+end_src

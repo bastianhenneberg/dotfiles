@@ -50,6 +50,7 @@
 ;; (unpin! t)
 
 (package! lsp-tailwindcss :recipe (:host github :repo "merrickluo/lsp-tailwindcss"))
+(package! org-excalidraw :recipe (:host github :repo "wdavew/org-excalidraw"))
 (package! astro-ts-mode)
 (package! toc-org)
 ;; (package! rainbow-mode)
