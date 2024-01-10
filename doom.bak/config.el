@@ -1,49 +1,7 @@
-#+TITLE: DOOM GNU Emacs Config
-#+AUTHOR: Bastian Henneberg
-#+DESCRIPTION: My personal Emacs configuration.
-#+STARTUP: showeverything
-#+OPTIONS: toc:2
-
-* Table of Contents :toc:
-- [[#important-programms-to-load-first][Important Programms to Load first]]
-  - [[#adding-the-scripts-directory-to-path][Adding the scripts directory to path]]
-  - [[#sourcing-the-scripts][Sourcing the scripts]]
-  - [[#keymaps][Keymaps]]
-- [[#doom-emacs-config][DOOM Emacs Config]]
-  - [[#doom-modline][Doom Modline]]
-- [[#rainbow-delimiters][RAINBOW DELIMITERS]]
-- [[#rainbow-mode][RAINBOW MODE]]
-- [[#org-mode][ORG MODE]]
-  - [[#org][Org]]
-  - [[#org-agenda][Org Agenda]]
-  - [[#enabling-table-of-contents][Enabling table of contents]]
-  - [[#org-roam][Org Roam]]
-  - [[#org-level-headers][Org Level Headers]]
-- [[#lsp-mode][LSP MODE]]
-  - [[#tailwindcss][TailwindCSS]]
-  - [[#astro-mode][Astro Mode]]
-  - [[#blade-mode][Blade Mode]]
-- [[#terminals][Terminals]]
-  - [[#multi-vterm][Multi-Vterm]]
-- [[#undo-fu][Undo Fu]]
-- [[#excalidraw][Excalidraw]]
-- [[#mu4e][Mu4e]]
-
-* Important Programms to Load first
-** Adding the scripts directory to path
-#+begin_src emacs-lisp
 (add-to-list 'load-path "~/.config/doom/scripts/")
 
-#+end_src
-
-** Sourcing the scripts
-#+begin_src emacs-lisp
 (require 'buffer-move)   ;; Buffer-move for better window management
 
-#+end_src
-
-** Keymaps
-#+begin_src emacs-lisp
 (map! :leader
       :desc "M-x"
       "SPC" #'execute-extended-command)
@@ -51,10 +9,7 @@
 (map! :leader
       :desc "Find File in Project"
       ":" #'projectile-find-file)
-#+end_src
 
-* DOOM Emacs Config
-#+begin_src emacs-lisp
 (setq doom-theme 'doom-dracula)
 
 (setq display-line-numbers-type 'relative)
@@ -74,10 +29,6 @@
   '(font-lock-comment-face :slant italic)
   '(font-lock-keyword-face :slant italic))
 
-#+end_src
-
-** Doom Modline
-#+begin_src emacs-lisp
 ;; If the actual char height is larger, it respects the actual height.
 (setq doom-modeline-height 50)
 ;; How wide the mode-line bar should be. It's only respected in GUI.
@@ -119,30 +70,15 @@
 ;; Whether display the live icons of time.
 ;; It respects option `doom-modeline-icon' and option `doom-modeline-time-icon'.
 (setq doom-modeline-time-live-icon t)
-#+end_src
 
-* RAINBOW DELIMITERS
-Adding rainbow coloring to parentheses.
-
-#+begin_src emacs-lisp
 (use-package rainbow-delimiters
   :hook ((emacs-lisp-mode . rainbow-delimiters-mode)
          (clojure-mode . rainbow-delimiters-mode)))
-#+end_src
 
-* RAINBOW MODE
-Display the actual color as a background for any hex color value (ex. #ffffff).  The code block below enables rainbow-mode in all programming modes (prog-mode) as well as org-mode, which is why rainbow works in this document.
-
-#+begin_src emacs-lisp
 (use-package rainbow-mode
   :hook
   ((org-mode prog-mode) . rainbow-mode))
-#+end_src
 
-
-* ORG MODE
-** Org
-#+begin_src emacs-lisp
 (setq org-directory "~/Documents/org/"
       org-hide-emphasis-markers t
       org-log-done 'time
@@ -150,10 +86,7 @@ Display the actual color as a background for any hex color value (ex. #ffffff). 
      ;;org-superstar-headline-bullets-list '("◉" "○" "⁖" "✸" "✿")
       )
 (add-to-list 'org-modules 'org-habit t)
-#+end_src
 
-** Org Agenda
-#+begin_src emacs-lisp
 (after! org
   (setq org-agenda-files '("~/Documents/org/" "~/Documents/org/org-roam/habit/" "~/Documents/org/org-roam/inbox/" "~/Documents/org/org-roam/customer/" "~/Documents/org/org-roam/project/"))
   (setq org-agenda-include-diary t)
@@ -162,18 +95,11 @@ Display the actual color as a background for any hex color value (ex. #ffffff). 
         org-habit-preceding-days 35
         org-habit-show-habits t)
   )
-#+end_src
 
+(use-package toc-org
+  :commands toc-org-mode
+  :init (add-hook 'org-mode-hook 'toc-org-enable))
 
-** Enabling table of contents
-#+begin_src emacs-lisp
-  (use-package toc-org
-    :commands toc-org-mode
-    :init (add-hook 'org-mode-hook 'toc-org-enable))
-#+end_src
-
-** Org Roam
-#+begin_src emacs-lisp
 (use-package org-roam
   :custom
   (org-roam-directory (file-truename "~/Documents/org/org-roam"))
@@ -204,31 +130,20 @@ Display the actual color as a background for any hex color value (ex. #ffffff). 
         :target (file+head "inbox/%<%Y%m%d%H%M%S>-${slug}.org" "${title}\n") :unnarrowed t)
      ))
 )
-#+end_src
 
-** Org Level Headers
-#+begin_src emacs-lisp
-  (custom-set-faces
-   '(org-level-1 ((t (:inherit outline-1 :height 1.15))))
-   '(org-level-2 ((t (:inherit outline-2 :height 1.10))))
-   '(org-level-3 ((t (:inherit outline-3 :height 1.08))))
-   '(org-level-4 ((t (:inherit outline-4 :height 1.06))))
-   '(org-level-5 ((t (:inherit outline-5 :height 1.04))))
-   '(org-level-6 ((t (:inherit outline-5 :height 1.02))))
-   '(org-level-7 ((t (:inherit outline-5 :height 1.00)))))
-#+end_src
+(custom-set-faces
+ '(org-level-1 ((t (:inherit outline-1 :height 1.15))))
+ '(org-level-2 ((t (:inherit outline-2 :height 1.10))))
+ '(org-level-3 ((t (:inherit outline-3 :height 1.08))))
+ '(org-level-4 ((t (:inherit outline-4 :height 1.06))))
+ '(org-level-5 ((t (:inherit outline-5 :height 1.04))))
+ '(org-level-6 ((t (:inherit outline-5 :height 1.02))))
+ '(org-level-7 ((t (:inherit outline-5 :height 1.00)))))
 
-* LSP MODE
-** TailwindCSS
-#+begin_src emacs-lisp
 (use-package! lsp-tailwindcss
   :init
   (setq lsp-tailwindcss-add-on-mode t))
 
-#+end_src
-
-** Astro Mode
-#+begin_src emacs-lisp
 (use-package astro-ts-mode)
 
 (setq treesit-language-source-alist
@@ -265,122 +180,21 @@ Display the actual color as a background for any hex color value (ex. #ffffff). 
                     :server-id 'astro-ls
                     :add-on? t))
 )
-#+end_src
 
-** Blade Mode
-#+begin_src emacs-lisp
 (define-derived-mode blade-mode web-mode "blade")
 
 (setq auto-mode-alist
       (append '((".*\\.blade.php\\'" . blade-mode))
               auto-mode-alist))
-#+end_src
 
-* Terminals
-** Multi-Vterm
-#+begin_src emacs-lisp
 (use-package multi-vterm)
 
-#+end_src
+(use-package undo-fu-session
+ :config
+ (setq undo-fu-session-compression nil)
+ )
 
-* Undo Fu
-#+begin_src emacs-lisp
-   (use-package undo-fu-session
-    :config
-    (setq undo-fu-session-compression nil)
-    )
-#+end_src
-
-* Excalidraw
-#+begin_src emacs-lisp
 (use-package org-excalidraw
   :config
   (setq org-excalidraw-directory "~/Documents/org/excalidraw")
 )
-
-#+end_src
-
-* Mu4e
-#+begin_src emacs-lisp
-(after! mu4e
-  (setq sendmail-program (executable-find "msmtp")
-	send-mail-function #'smtpmail-send-it
-	message-sendmail-f-is-evil t
-	message-sendmail-extra-arguments '("--read-envelope-from")
-	message-send-mail-function #'message-send-mail-with-sendmail)
-
-  (setq mu4e-maildir "~/mail")
-
-  (setq mu4e-contexts
-        (list
-         ;; Info account
-         (make-mu4e-context
-          :name "Info"
-          :match-func
-            (lambda (msg)
-              (when msg
-                (string-prefix-p "/info" (mu4e-message-field msg :maildir))))
-          :vars '((user-mail-address . "info@brandkollektiv.de")
-                  (user-full-name    . "info@brandkollektiv.de")
-                  (mu4e-drafts-folder  . "/info/[Gmail]/Entw&APw-rfe")
-                  (mu4e-sent-folder  . "/info/[Gmail]/Gesendet")
-                  (mu4e-refile-folder  . "/info/[Gmail]/Alle Nachrichten")
-                  (mu4e-trash-folder  . "/info/[Gmail]/Papierkorb")))
-
-         ;; Buchhaltung account
-          (make-mu4e-context
-          :name "Buchhaltung"
-          :match-func
-            (lambda (msg)
-              (when msg
-                (string-prefix-p "/buchhaltung" (mu4e-message-field msg :maildir))))
-          :vars '((user-mail-address . "buchhaltung@brandkollektiv.de")
-                  (user-full-name    . "buchhaltung@brandkollektiv.de")
-                  (mu4e-drafts-folder  . "/buchhaltung/[Gmail]/Entw&APw-rfe")
-                  (mu4e-sent-folder  . "/buchhaltung/[Gmail]/Gesendet")
-                  (mu4e-refile-folder  . "/buchhaltung/[Gmail]/Alle Nachrichten")
-                  (mu4e-trash-folder  . "/buchhaltung/[Gmail]/Papierkorb")))
-
-          ;; Peppermint account
-          (make-mu4e-context
-          :name "Peppermint"
-          :match-func
-            (lambda (msg)
-              (when msg
-                (string-prefix-p "/peppermint" (mu4e-message-field msg :maildir))))
-          :vars '((user-mail-address . "henneberg@peppermint-digital.de")
-                  (user-full-name    . "henneberg@peppermint-digital.de")
-                  (mu4e-drafts-folder  . "/peppermint/Drafts")
-                  (mu4e-sent-folder  . "/peppermint/Sent")
-                  (mu4e-refile-folder  . "/peppermint/Archives")
-                  (mu4e-trash-folder  . "/peppermint/Trash")))
-
-    )
-
-;;   (set-email-account! "buchhaltung@brandkollektiv.de"
-;;   '((mu4e-sent-folder       . "/buchhaltung/[Gmail]/Gesendet")
-;;     (mu4e-drafts-folder     . "/buchhaltung/[Gmail]/Entw&APw-rfe")
-;;     (mu4e-trash-folder      . "/buchhaltung/[Gmail]/Papierkorb")
-;;     (mu4e-refile-folder     . "/buchhaltung/[Gmail]/All Nachrichten")
-;;     (smtpmail-smtp-user     . "buchhaltung@brandkollektiv.de")
-;;     (user-mail-address      . "buchhaltung@brandkollektiv.de")    ;; only needed for mu < 1.4
-;;     (mu4e-compose-signature . "---\nBastian Henneberg"))
-;;   t)
-
-;;   (set-email-account! "info@brandkollektiv.de"
-;;   '((mu4e-sent-folder       . "/info/[Gmail]/Gesendet")
-;;     (mu4e-drafts-folder     . "/info/[Gmail]/Entw&APw-rfe")
-;;     (mu4e-trash-folder      . "/info/[Gmail]/Papierkorb")
-;;     (mu4e-refile-folder     . "/info/[Gmail]/All Nachrichten")
-;;     (smtpmail-smtp-user     . "info@brandkollektiv.de")
-;;     (user-mail-address      . "info@brandkollektiv.de")    ;; only needed for mu < 1.4
-;;     (mu4e-compose-signature . "---\nBastian Henneberg"))
-;;   t)
-
-;; (setq mu4e-context-policy 'ask-if-none
-      mu4e-compose-context-policy 'always-ask)
-
-
-)
-
-#+end_src

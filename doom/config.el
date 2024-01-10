@@ -82,12 +82,13 @@
 (setq org-directory "~/Documents/org/"
       org-hide-emphasis-markers t
       org-log-done 'time
+      org-archive-location "~/Documents/org/archive/archive.org::)"
      ;;org-superstar-headline-bullets-list '("◉" "○" "⁖" "✸" "✿")
       )
 (add-to-list 'org-modules 'org-habit t)
 
 (after! org
-  (setq org-agenda-files '("~/Documents/org/" "~/Documents/org/org-roam"))
+  (setq org-agenda-files '("~/Documents/org/" "~/Documents/org/org-roam/habit/" "~/Documents/org/org-roam/inbox/" "~/Documents/org/org-roam/customer/" "~/Documents/org/org-roam/project/"))
   (setq org-agenda-include-diary t)
   (setq org-habit-show-all-today t)
   (setq org-habit-following-days 7
@@ -115,13 +116,19 @@
       '(("d" "default" entry
          "* %?"
          :target (file+head "%<%Y-%m-%d>.org"
-         "#+title: %<%Y-%m-%d>\n"))))
+         "%<%Y-%m-%d>\n"))))
   (setq org-roam-capture-templates
-        '(("a" "workstuff" plain (file "~/Documents/org/org-roam/customer/templates/normal.org")
+        '(("a" "workstuff" plain (file "~/Documents/org/org-roam/templates/customer.org")
         :target (file+head "customer/%<%Y%m%d%H%M%S>-${slug}.org" "${title}\n") :unnarrowed t)
-        ("b" "research" plain (file "~/Documents/org/org-roam/work/templates/updates.org")
-        :target (file+head "work/%<%Y%m%d%H%M%S>-${slug}.org" "${title}\n") :unnarrowed t)
-        ))
+        ("b" "project" plain (file "~/Documents/org/org-roam/templates/project.org")
+        :target (file+head "project/%<%Y%m%d%H%M%S>-${slug}.org" "${title}\n") :unnarrowed t)
+        ("c" "habit" plain (file "~/Documents/org/org-roam/templates/habit.org")
+        :target (file+head "habit/%<%Y%m%d%H%M%S>-${slug}.org" "${title}\n") :unnarrowed t)
+        ("d" "default" plain (file "~/Documents/org/org-roam/templates/default.org")
+        :target (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "${title}\n") :unnarrowed t)
+        ("i" "inbox" plain (file "~/Documents/org/org-roam/templates/inbox.org")
+        :target (file+head "inbox/%<%Y%m%d%H%M%S>-${slug}.org" "${title}\n") :unnarrowed t)
+     ))
 )
 
 (custom-set-faces
@@ -190,4 +197,85 @@
 (use-package org-excalidraw
   :config
   (setq org-excalidraw-directory "~/Documents/org/excalidraw")
+)
+
+(after! mu4e
+  (setq sendmail-program (executable-find "msmtp")
+	send-mail-function #'smtpmail-send-it
+	message-sendmail-f-is-evil t
+	message-sendmail-extra-arguments '("--read-envelope-from")
+	message-send-mail-function #'message-send-mail-with-sendmail)
+
+  (setq mu4e-maildir "~/mail")
+
+  (setq mu4e-contexts
+        (list
+         ;; Info account
+         (make-mu4e-context
+          :name "Info"
+          :match-func
+            (lambda (msg)
+              (when msg
+                (string-prefix-p "/info" (mu4e-message-field msg :maildir))))
+          :vars '((user-mail-address . "info@brandkollektiv.de")
+                  (user-full-name    . "info@brandkollektiv.de")
+                  (mu4e-drafts-folder  . "/info/[Gmail]/Entw&APw-rfe")
+                  (mu4e-sent-folder  . "/info/[Gmail]/Gesendet")
+                  (mu4e-refile-folder  . "/info/[Gmail]/Alle Nachrichten")
+                  (mu4e-trash-folder  . "/info/[Gmail]/Papierkorb")))
+
+         ;; Buchhaltung account
+          (make-mu4e-context
+          :name "Buchhaltung"
+          :match-func
+            (lambda (msg)
+              (when msg
+                (string-prefix-p "/buchhaltung" (mu4e-message-field msg :maildir))))
+          :vars '((user-mail-address . "buchhaltung@brandkollektiv.de")
+                  (user-full-name    . "buchhaltung@brandkollektiv.de")
+                  (mu4e-drafts-folder  . "/buchhaltung/[Gmail]/Entw&APw-rfe")
+                  (mu4e-sent-folder  . "/buchhaltung/[Gmail]/Gesendet")
+                  (mu4e-refile-folder  . "/buchhaltung/[Gmail]/Alle Nachrichten")
+                  (mu4e-trash-folder  . "/buchhaltung/[Gmail]/Papierkorb")))
+
+          ;; Peppermint account
+          (make-mu4e-context
+          :name "Peppermint"
+          :match-func
+            (lambda (msg)
+              (when msg
+                (string-prefix-p "/peppermint" (mu4e-message-field msg :maildir))))
+          :vars '((user-mail-address . "henneberg@peppermint-digital.de")
+                  (user-full-name    . "henneberg@peppermint-digital.de")
+                  (mu4e-drafts-folder  . "/peppermint/Drafts")
+                  (mu4e-sent-folder  . "/peppermint/Sent")
+                  (mu4e-refile-folder  . "/peppermint/Archives")
+                  (mu4e-trash-folder  . "/peppermint/Trash")))
+
+    )
+
+;;   (set-email-account! "buchhaltung@brandkollektiv.de"
+;;   '((mu4e-sent-folder       . "/buchhaltung/[Gmail]/Gesendet")
+;;     (mu4e-drafts-folder     . "/buchhaltung/[Gmail]/Entw&APw-rfe")
+;;     (mu4e-trash-folder      . "/buchhaltung/[Gmail]/Papierkorb")
+;;     (mu4e-refile-folder     . "/buchhaltung/[Gmail]/All Nachrichten")
+;;     (smtpmail-smtp-user     . "buchhaltung@brandkollektiv.de")
+;;     (user-mail-address      . "buchhaltung@brandkollektiv.de")    ;; only needed for mu < 1.4
+;;     (mu4e-compose-signature . "---\nBastian Henneberg"))
+;;   t)
+
+;;   (set-email-account! "info@brandkollektiv.de"
+;;   '((mu4e-sent-folder       . "/info/[Gmail]/Gesendet")
+;;     (mu4e-drafts-folder     . "/info/[Gmail]/Entw&APw-rfe")
+;;     (mu4e-trash-folder      . "/info/[Gmail]/Papierkorb")
+;;     (mu4e-refile-folder     . "/info/[Gmail]/All Nachrichten")
+;;     (smtpmail-smtp-user     . "info@brandkollektiv.de")
+;;     (user-mail-address      . "info@brandkollektiv.de")    ;; only needed for mu < 1.4
+;;     (mu4e-compose-signature . "---\nBastian Henneberg"))
+;;   t)
+
+;; (setq mu4e-context-policy 'ask-if-none
+      mu4e-compose-context-policy 'always-ask)
+
+
 )

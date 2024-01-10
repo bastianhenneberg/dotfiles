@@ -1,0 +1,22 @@
+[general]
+accounts = outlook365
+
+[Account outlook365]
+localrepository = outlook365-local
+remoterepository = outlook365-remote
+maxsyncaccounts = 1
+
+[Repository outlook365-local]
+type = Maildir
+localfolders = ~/Test
+
+[Repository outlook365-remote]
+type = IMAP
+remoteuser = henneberg@peppermint-digital.de       # set your username / email here
+remotepass = eiwgZwmvFNjv2K!(         # set your password here
+remotehost = outlook.office365.com
+remoteport = 993
+ssl = yes
+realdelete = no
+sync_deletes = no
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt

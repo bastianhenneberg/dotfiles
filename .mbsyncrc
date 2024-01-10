@@ -1,0 +1,69 @@
+# Remote buchhaltung@brandkollektiv.de
+IMAPStore buchhaltung-remote
+Host imap.gmail.com
+SSLType IMAPS
+AuthMechs LOGIN
+User buchhaltung@brandkollektiv.de
+Pass "szwl skoa aihv qkxt"
+
+MaildirStore buchhaltung-local
+Path ~/mail/buchhaltung/
+Inbox ~/mail/buchhaltung/INBOX
+Subfolders Verbatim
+
+Channel buchhaltung
+Far :buchhaltung-remote:
+Near :buchhaltung-local:
+Create Both
+Expunge Both
+Patterns *
+SyncState *
+
+# Remote info@brandkollektiv.de
+IMAPStore info-remote
+Host imap.gmail.com
+SSLType IMAPS
+AuthMechs LOGIN
+User info@brandkollektiv.de
+Pass "zmst kpkg hvhj ktbl"
+
+MaildirStore info-local
+Path ~/mail/info/
+Inbox ~/mail/info/INBOX
+Subfolders Verbatim
+
+Channel info
+Far :info-remote:
+Near :info-local:
+Create Both
+Expunge Both
+Patterns * !"[Gmail]/All Mail" !"[Gmail]/Important" !"[Gmail]/Starred" !"[Gmail]/Bin"
+SyncState *
+
+# Peppermint
+IMAPAccount peppermint
+Host 127.0.0.1
+Port 1143
+User "henneberg@peppermint-digital.de"
+Pass "eiwgZwmvFNjv2K!("
+SSLType None
+AuthMechs LOGIN
+
+IMAPStore peppermint-remote
+Account peppermint
+
+MaildirStore peppermint-local
+Subfolders Verbatim
+Path ~/mail/peppermint/
+Inbox ~/mail/peppermint/Inbox
+
+Channel peppermint
+Far :peppermint-remote:
+Near :peppermint-local:
+SyncState *
+Patterns *
+Create Both
+Sync All
+Expunge Near
+
+# Patterns Archive Drafts SentItems DeletedItems JunkEmail INBOX
