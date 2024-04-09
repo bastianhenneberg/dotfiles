@@ -88,12 +88,13 @@
 (add-to-list 'org-modules 'org-habit t)
 
 (after! org
-  (setq org-agenda-files '("~/Documents/org/" "~/Documents/org/org-roam/habit/" "~/Documents/org/org-roam/inbox/" "~/Documents/org/org-roam/customer/" "~/Documents/org/org-roam/project/"))
+  (setq org-agenda-files '("~/Documents/org/org-roam/habit/" "~/Documents/org/org-roam/list/"))
   (setq org-agenda-include-diary t)
   (setq org-habit-show-all-today t)
   (setq org-habit-following-days 7
         org-habit-preceding-days 35
         org-habit-show-habits t)
+  (setq org-log-into-drawer "LOGBOOK")
   )
 
 (use-package toc-org
@@ -113,22 +114,23 @@
          ("C-c n j" . org-roam-dailies-capture-today))
   :config
   (setq org-roam-dailies-capture-templates
-      '(("d" "default" entry
-         "* %?"
-         :target (file+head "%<%Y-%m-%d>.org"
-         "%<%Y-%m-%d>\n"))))
+      '(("s" "daily" entry (file "~/Documents/org/org-roam/templates/daily.org")
+         :target (file+head "%<%Y-%m-%d>.org" "%<%Y-%m-%d>\n"))
+        ))
   (setq org-roam-capture-templates
         '(("a" "workstuff" plain (file "~/Documents/org/org-roam/templates/customer.org")
-        :target (file+head "customer/%<%Y%m%d%H%M%S>-${slug}.org" "${title}\n") :unnarrowed t)
+        :target (file+head "customer/${slug}.org" "${title}\n") :unnarrowed t)
         ("b" "project" plain (file "~/Documents/org/org-roam/templates/project.org")
-        :target (file+head "project/%<%Y%m%d%H%M%S>-${slug}.org" "${title}\n") :unnarrowed t)
-        ("c" "habit" plain (file "~/Documents/org/org-roam/templates/habit.org")
-        :target (file+head "habit/%<%Y%m%d%H%M%S>-${slug}.org" "${title}\n") :unnarrowed t)
+        :target (file+head "project/${slug}.org" "${title}\n") :unnarrowed t)
+        ("h" "habit" plain (file "~/Documents/org/org-roam/templates/habit.org")
+        :target (file+head "habit/${slug}.org" "${title}\n") :unnarrowed t)
         ("d" "default" plain (file "~/Documents/org/org-roam/templates/default.org")
-        :target (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "${title}\n") :unnarrowed t)
-        ("i" "inbox" plain (file "~/Documents/org/org-roam/templates/inbox.org")
-        :target (file+head "inbox/%<%Y%m%d%H%M%S>-${slug}.org" "${title}\n") :unnarrowed t)
-     ))
+        :target (file+head "${slug}.org" "${title}\n") :unnarrowed t)
+        ("l" "list" plain (file "~/Documents/org/org-roam/templates/list.org")
+        :target (file+head "list/${slug}.org" "${title}\n") :unnarrowed t)
+        ("c" "contact" plain (file "~/Documents/org/org-roam/templates/contact.org")
+        :target (file+head "contact/${slug}.org" "${title}\n") :unnarrowed t)
+        ))
 )
 
 (custom-set-faces
@@ -153,11 +155,11 @@
         (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
 ))
 
- (setenv "PATH" (concat (getenv "PATH") "/home/bastian/.nvm/versions/node/v21.2.0/bin/astro-ls"))
- (add-to-list 'exec-path (expand-file-name "/home/bastian/.nvm/versions/node/v21.2.0/bin/"))
+  (setenv "PATH" (concat (getenv "PATH") "/home/bastian/.nvm/versions/node/v21.2.0/bin/astro-ls"))
+  (add-to-list 'exec-path (expand-file-name "/home/bastian/.nvm/versions/node/v21.2.0/bin/"))
 
- (setenv "PATH" (concat (getenv "PATH") "/home/bastian/.nvm/versions/node/v21.2.0/bin/tailwindcss-language-server"))
- (add-to-list 'exec-path (expand-file-name "/home/bastian/.nvm/versions/node/v21.2.0/bin/"))
+  (setenv "PATH" (concat (getenv "PATH") "/home/bastian/.nvm/versions/node/v21.2.0/bin/tailwindcss-language-server"))
+  (add-to-list 'exec-path (expand-file-name "/home/bastian/.nvm/versions/node/v21.2.0/bin/"))
 
 (define-derived-mode astro-mode astro-ts-mode "astro")
 
@@ -176,10 +178,35 @@
                     :add-on? t))
 (lsp-register-client
    (make-lsp-client :new-connection (lsp-stdio-connection '("astro-ls" "--stdio"))
+                    ;;:initialization-options '("./node_modules/typescript/lib")
                     :activation-fn (lsp-activate-on "astro")
                     :server-id 'astro-ls
                     :add-on? t))
 )
+
+;; ;; WEB MODE
+;; (use-package web-mode
+;;   :ensure t)
+
+;; ;; ASTRO
+;; (define-derived-mode astro-mode web-mode "astro")
+;; (setq auto-mode-alist
+;;       (append '((".*\\.astro\\'" . astro-mode))
+;;               auto-mode-alist))
+
+;; ;; EGLOT
+;; (use-package eglot
+;;   :ensure t
+;;   :config
+;;   (add-to-list 'eglot-server-programs
+;;                '(astro-mode . '(("astro-ls" "--stdio"
+;;                                :initializationOptions
+;;                                (:typescript (:tsdk "./node_modules/typescript/lib")))
+;; ("tailwindcss-language-server" "--stdio")
+;;                                 )))
+;;   :init
+;;   ;; auto start eglot for astro-mode
+;;   (add-hook 'astro-mode-hook 'eglot-ensure))
 
 (define-derived-mode blade-mode web-mode "blade")
 
@@ -222,7 +249,8 @@
                   (mu4e-drafts-folder  . "/info/[Gmail]/Entw&APw-rfe")
                   (mu4e-sent-folder  . "/info/[Gmail]/Gesendet")
                   (mu4e-refile-folder  . "/info/[Gmail]/Alle Nachrichten")
-                  (mu4e-trash-folder  . "/info/[Gmail]/Papierkorb")))
+                  (mu4e-trash-folder  . "/info/[Gmail]/Papierkorb")
+                  (mu4e-compose-signature . "---\nBastian Henneberg\nHead of Development")))
 
          ;; Buchhaltung account
           (make-mu4e-context
@@ -236,7 +264,8 @@
                   (mu4e-drafts-folder  . "/buchhaltung/[Gmail]/Entw&APw-rfe")
                   (mu4e-sent-folder  . "/buchhaltung/[Gmail]/Gesendet")
                   (mu4e-refile-folder  . "/buchhaltung/[Gmail]/Alle Nachrichten")
-                  (mu4e-trash-folder  . "/buchhaltung/[Gmail]/Papierkorb")))
+                  (mu4e-trash-folder  . "/buchhaltung/[Gmail]/Papierkorb")
+                  (mu4e-compose-signature . "---\nBastian Henneberg\nHead of Development")))
 
           ;; Peppermint account
           (make-mu4e-context
@@ -249,33 +278,13 @@
                   (user-full-name    . "henneberg@peppermint-digital.de")
                   (mu4e-drafts-folder  . "/peppermint/Drafts")
                   (mu4e-sent-folder  . "/peppermint/Sent")
-                  (mu4e-refile-folder  . "/peppermint/Archives")
-                  (mu4e-trash-folder  . "/peppermint/Trash")))
+                  (mu4e-refile-folder  . "/peppermint/Archiv")
+                  (mu4e-trash-folder  . "/peppermint/Trash")
+                  (mu4e-compose-signature . "---\nBastian Henneberg\nHead of Development")))
 
     )
 
-;;   (set-email-account! "buchhaltung@brandkollektiv.de"
-;;   '((mu4e-sent-folder       . "/buchhaltung/[Gmail]/Gesendet")
-;;     (mu4e-drafts-folder     . "/buchhaltung/[Gmail]/Entw&APw-rfe")
-;;     (mu4e-trash-folder      . "/buchhaltung/[Gmail]/Papierkorb")
-;;     (mu4e-refile-folder     . "/buchhaltung/[Gmail]/All Nachrichten")
-;;     (smtpmail-smtp-user     . "buchhaltung@brandkollektiv.de")
-;;     (user-mail-address      . "buchhaltung@brandkollektiv.de")    ;; only needed for mu < 1.4
-;;     (mu4e-compose-signature . "---\nBastian Henneberg"))
-;;   t)
-
-;;   (set-email-account! "info@brandkollektiv.de"
-;;   '((mu4e-sent-folder       . "/info/[Gmail]/Gesendet")
-;;     (mu4e-drafts-folder     . "/info/[Gmail]/Entw&APw-rfe")
-;;     (mu4e-trash-folder      . "/info/[Gmail]/Papierkorb")
-;;     (mu4e-refile-folder     . "/info/[Gmail]/All Nachrichten")
-;;     (smtpmail-smtp-user     . "info@brandkollektiv.de")
-;;     (user-mail-address      . "info@brandkollektiv.de")    ;; only needed for mu < 1.4
-;;     (mu4e-compose-signature . "---\nBastian Henneberg"))
-;;   t)
-
-;; (setq mu4e-context-policy 'ask-if-none
+      ;; (setq mu4e-context-policy 'ask-if-none
       mu4e-compose-context-policy 'always-ask)
-
 
 )

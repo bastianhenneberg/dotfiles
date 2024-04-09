@@ -184,26 +184,40 @@ window#waybar.empty #window {
     margin-right:20px;
 }
 
+#custom-chatgpt {
+    margin-right: 15px;
+    background-image: url("../assets/ai-icon.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    padding-right: 24px;
+}
+
+#custom-ml4w-welcome {
+    margin-right: 15px;
+    background-image: url("../assets/ml4w-icon.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    padding-right: 24px;
+}
+
 /* -----------------------------------------------------
  * Idle Inhibator
  * ----------------------------------------------------- */
 
 #idle_inhibitor {
     margin-right: 15px;
-    font-size: 16px;
+    font-size: 22px;
     font-weight: bold;
     opacity: 0.8;
     color: @iconcolor;
 }
 
 #idle_inhibitor.activated {
-    background-color: #dc2f2f;
-    font-size: 16px;
-    color:#ffffff;
-    border-radius: 15px;
-    padding: 2px 10px 0px 10px;
-    margin: 5px 15px 5px 0px;
-    opacity:0.8;    
+    margin-right: 15px;
+    font-size: 20px;
+    font-weight: bold;
+    opacity: 0.8;
+    color: #dc2f2f;
 }
 
 /* -----------------------------------------------------
@@ -419,23 +433,4 @@ window#waybar.empty #window {
     -gtk-icon-effect: highlight;
 }
 
-/* -----------------------------------------------------
- * Other
- * ----------------------------------------------------- */
-
-label:focus {
-    background-color: #000000;
-}
-
-#backlight {
-    background-color: #90b1b1;
-}
-
-#network {
-    background-color: #2980b9;
-}
-
-#network.disconnected {
-    background-color: #f53c3c;
-}
 

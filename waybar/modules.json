@@ -21,9 +21,7 @@
 			"default": ""
         },
         "persistent-workspaces": {
-            // START WORKSPACES
-    "*": 5
-            // END WORKSPACES
+            "*": 5
         }       
     },
 
@@ -58,6 +56,18 @@
         "separate-outputs": true
     },
 
+    // ML4W Welcome App
+    "custom/ml4w-welcome": {
+        "on-click": "~/dotfiles/apps/ML4W_Welcome-x86_64.AppImage",
+        "format": " ",
+        "tooltip": false
+    },
+
+    // Empty
+    "custom/empty": {
+        "format": ""
+    },
+
     // Youtube Subscriber Count
     "custom/youtube": {
         "format": " {}",
@@ -84,7 +94,7 @@
         "return-type": "json",       
         "exec": "~/dotfiles/scripts/updates.sh",
         "restart-interval": 60,
-        "on-click": "alacritty -e ~/dotfiles/scripts/installupdates.sh",
+        "on-click": "alacritty --class dotfiles-floating -e ~/dotfiles/scripts/installupdates.sh",
         "on-click-right": "~/dotfiles/.settings/software.sh",
         "tooltip": false
     },
@@ -107,7 +117,7 @@
     // Settings
     "custom/settings": {
         "format": "",
-        "on-click": "alacritty --class dotfiles-floating -e ~/dotfiles/hypr/start-settings.sh",
+        "on-click": "~/dotfiles/apps/ML4W_Dotfiles_Settings-x86_64.AppImage",
         "tooltip": false
     },
 
@@ -120,7 +130,7 @@
 
     // Filemanager Launcher
     "custom/filemanager": {
-        "format": "",
+        "format": "",
         "on-click": "~/dotfiles/.settings/filemanager.sh",
         "tooltip": false
     },
@@ -141,14 +151,14 @@
 
     // Browser Launcher
     "custom/browser": {
-        "format": "",
+        "format": "",
         "on-click": "~/dotfiles/.settings/browser.sh",
         "tooltip": false
     },    
 
     // ChatGPT Launcher
     "custom/chatgpt": {
-        "format": "",
+        "format": " ",
         "on-click": "chromium --app=https://chat.openai.com",
         "tooltip": false
     },
@@ -172,11 +182,19 @@
         // START APPS LABEL
         "format": "Apps",
         // END APPS LABEL
-        "on-click": "rofi -show drun -replace",
+        "on-click": "sleep 0.2;rofi -show drun -replace",
         "on-click-right": "~/dotfiles/hypr/scripts/keybindings.sh",
         "tooltip": false
     },
-    
+
+    // Rofi Application Launcher
+    "custom/appmenuicon": {
+        "format": "",
+        "on-click": "rofi -show drun -replace",
+        "on-click-right": "~/dotfiles/hypr/scripts/keybindings.sh",
+        "tooltip": false
+    },    
+
     // Power Menu
     "custom/exit": {
         "format": "",
@@ -203,6 +221,7 @@
 
     // Clock
     "clock": {
+        "format": "{:%H:%M %a}",
         // "timezone": "America/New_York",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         // START CLOCK FORMAT
@@ -259,13 +278,11 @@
     
     // Group Settings
     "group/settings": {
-        "orientation": "inherit",
-        "drawer": {
-            "transition-duration": 300,
-            "children-class": "not-memory",
-            "transition-left-to-right": false
-        },        
+        "orientation": "horizontal",
         "modules": [
+            // START CHATGPT TOOGLE
+            "custom/chatgpt",
+            // END CHATGPT TOOGLE
             "custom/settings",
             "custom/waybarthemes",
             "custom/wallpaper"
@@ -276,8 +293,8 @@
     "group/quicklinks": {
         "orientation": "horizontal",
         "modules": [
+            "custom/browser",
             "custom/filemanager",
-            "custom/browser"
          ]
     },
 
@@ -285,11 +302,11 @@
     "network": {
         "format": "{ifname}",
         "format-wifi": "   {signalStrength}%",
-        "format-ethernet": "  {ipaddr}",
-        "format-disconnected": "Not connected", //An empty format will hide the module.
+        "format-ethernet": "  {ifname}",
+        "format-disconnected": "Disconnected",
         "tooltip-format": " {ifname} via {gwaddri}",
-        "tooltip-format-wifi": "   {essid} ({signalStrength}%)",
-        "tooltip-format-ethernet": "  {ifname} ({ipaddr}/{cidr})",
+        "tooltip-format-wifi": "  {ifname} @ {essid}\nIP: {ipaddr}\nStrength: {signalStrength}%\nFreq: {frequency}MHz\nUp: {bandwidthUpBits} Down: {bandwidthDownBits}",
+        "tooltip-format-ethernet": " {ifname}\nIP: {ipaddr}\n up: {bandwidthUpBits} down: {bandwidthDownBits}",
         "tooltip-format-disconnected": "Disconnected",
         "max-length": 50,
         "on-click": "~/dotfiles/.settings/networkmanager.sh"
@@ -321,13 +338,13 @@
         "format-source": "{volume}% ",
         "format-source-muted": "",
         "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": ["", " ", " "]
+            "headphone": " ",
+            "hands-free": " ",
+            "headset": " ",
+            "phone": " ",
+            "portable": " ",
+            "car": " ",
+            "default": [" ", " ", " "]
         },
         "on-click": "pavucontrol"
     },
@@ -338,7 +355,8 @@
         "format-disabled": "",
         "format-off": "",
         "interval": 30,
-        "on-click": "blueman-manager"
+        "on-click": "blueman-manager",
+        "format-no-controller": ""
     },
 
     // Other
@@ -348,12 +366,14 @@
         "icon": false,
     },
 
+    // Idle Inhibator
     "idle_inhibitor": {
         "format": "{icon}",
-        "tooltip": false,
+        "tooltip": true,
         "format-icons":{
-            "activated": "Auto lock OFF",
-            "deactivated": "ON"
-        }
+            "activated": "",
+            "deactivated": ""
+        },
+        "on-click-right": "hyprlock"        
     }
 }
