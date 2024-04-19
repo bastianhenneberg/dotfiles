@@ -4,5 +4,5 @@ return {
     opts = {
       colorscheme = "tokyonight",
     },
-  },
+  }
 }
