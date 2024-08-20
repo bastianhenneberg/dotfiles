@@ -18,8 +18,8 @@
 (setq-default line-spacing 0.12)
 
 ;; Settings for Font Family and Size
-(setq doom-font (font-spec :family "MesloLGL Nerd Font Mono" :size 16))
-;; (setq doom-font (font-spec :family "Fira Code Nerd Font Mono" :size 17))
+;;(setq doom-font (font-spec :family "MesloLGL Nerd Font Mono" :size 16))
+(setq doom-font (font-spec :family "Fira Code Nerd Font Mono" :size 17))
 
 (after! doom-themes
   (setq doom-themes-enable-bold t
@@ -79,16 +79,16 @@
   :hook
   ((org-mode prog-mode) . rainbow-mode))
 
-(setq org-directory "~/Documents/org/"
+(setq org-directory "~/Dokumente/org/"
       org-hide-emphasis-markers t
       org-log-done 'time
-      org-archive-location "~/Documents/org/archive/archive.org::)"
+      org-archive-location "~/Dokumente/org/archive/archive.org::)"
      ;;org-superstar-headline-bullets-list '("◉" "○" "⁖" "✸" "✿")
       )
 (add-to-list 'org-modules 'org-habit t)
 
 (after! org
-  (setq org-agenda-files '("~/Documents/org/org-roam/habit/" "~/Documents/org/org-roam/list/"))
+  (setq org-agenda-files '("~/Dokumente/org/org-roam/habit/" "~/Dokumente/org/org-roam/list/"))
   (setq org-agenda-include-diary t)
   (setq org-habit-show-all-today t)
   (setq org-habit-following-days 7
@@ -103,7 +103,7 @@
 
 (use-package org-roam
   :custom
-  (org-roam-directory (file-truename "~/Documents/org/org-roam"))
+  (org-roam-directory (file-truename "~/Dokumente/org/org-roam"))
   (org-roam-complete-everywhere t)
   :bind (("C-c n l" . org-roam-buffer-toggle)
          ("C-c n f" . org-roam-node-find)
@@ -114,21 +114,21 @@
          ("C-c n j" . org-roam-dailies-capture-today))
   :config
   (setq org-roam-dailies-capture-templates
-      '(("s" "daily" entry (file "~/Documents/org/org-roam/templates/daily.org")
+      '(("s" "daily" entry (file "~/Dokumente/org/org-roam/templates/daily.org")
          :target (file+head "%<%Y-%m-%d>.org" "%<%Y-%m-%d>\n"))
         ))
   (setq org-roam-capture-templates
-        '(("a" "workstuff" plain (file "~/Documents/org/org-roam/templates/customer.org")
+        '(("a" "workstuff" plain (file "~/Dokumente/org/org-roam/templates/customer.org")
         :target (file+head "customer/${slug}.org" "${title}\n") :unnarrowed t)
-        ("b" "project" plain (file "~/Documents/org/org-roam/templates/project.org")
+        ("b" "project" plain (file "~/Dokumente/org/org-roam/templates/project.org")
         :target (file+head "project/${slug}.org" "${title}\n") :unnarrowed t)
-        ("h" "habit" plain (file "~/Documents/org/org-roam/templates/habit.org")
+        ("h" "habit" plain (file "~/Dokumente/org/org-roam/templates/habit.org")
         :target (file+head "habit/${slug}.org" "${title}\n") :unnarrowed t)
-        ("d" "default" plain (file "~/Documents/org/org-roam/templates/default.org")
+        ("d" "default" plain (file "~/Dokumente/org/org-roam/templates/default.org")
         :target (file+head "${slug}.org" "${title}\n") :unnarrowed t)
-        ("l" "list" plain (file "~/Documents/org/org-roam/templates/list.org")
+        ("l" "list" plain (file "~/Dokumente/org/org-roam/templates/list.org")
         :target (file+head "list/${slug}.org" "${title}\n") :unnarrowed t)
-        ("c" "contact" plain (file "~/Documents/org/org-roam/templates/contact.org")
+        ("c" "contact" plain (file "~/Dokumente/org/org-roam/templates/contact.org")
         :target (file+head "contact/${slug}.org" "${title}\n") :unnarrowed t)
         ))
 )
@@ -142,47 +142,51 @@
  '(org-level-6 ((t (:inherit outline-5 :height 1.02))))
  '(org-level-7 ((t (:inherit outline-5 :height 1.00)))))
 
-(use-package! lsp-tailwindcss
-  :init
-  (setq lsp-tailwindcss-add-on-mode t))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; (use-package! lsp-tailwindcss           ;;
+;;   :init                                 ;;
+;;   (setq lsp-tailwindcss-add-on-mode t)) ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package astro-ts-mode)
-
-(setq treesit-language-source-alist
-      '((astro "https://github.com/virchau13/tree-sitter-astro")
-        (css "https://github.com/tree-sitter/tree-sitter-css")
-        (typescript  "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
-        (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
-))
-
-  (setenv "PATH" (concat (getenv "PATH") "/home/bastian/.nvm/versions/node/v21.2.0/bin/astro-ls"))
-  (add-to-list 'exec-path (expand-file-name "/home/bastian/.nvm/versions/node/v21.2.0/bin/"))
-
-  (setenv "PATH" (concat (getenv "PATH") "/home/bastian/.nvm/versions/node/v21.2.0/bin/tailwindcss-language-server"))
-  (add-to-list 'exec-path (expand-file-name "/home/bastian/.nvm/versions/node/v21.2.0/bin/"))
-
-(define-derived-mode astro-mode astro-ts-mode "astro")
-
-(setq auto-mode-alist
-      (append '((".*\\.astro\\'" . astro-mode))
-              auto-mode-alist))
-
-(with-eval-after-load 'lsp-mode
-  (add-to-list 'lsp-language-id-configuration
-               '(astro-mode . "astro"))
-
- (lsp-register-client
-   (make-lsp-client :new-connection (lsp-stdio-connection '("tailwindcss-language-server" "--stdio"))
-                    :activation-fn (lsp-activate-on "astro" "blade")
-                    :server-id 'tailwindcss-language-server
-                    :add-on? t))
-(lsp-register-client
-   (make-lsp-client :new-connection (lsp-stdio-connection '("astro-ls" "--stdio"))
-                    ;;:initialization-options '("./node_modules/typescript/lib")
-                    :activation-fn (lsp-activate-on "astro")
-                    :server-id 'astro-ls
-                    :add-on? t))
-)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; (use-package astro-ts-mode)                                                                                           ;;
+;;                                                                                                                       ;;
+;; (setq treesit-language-source-alist                                                                                   ;;
+;;       '((astro "https://github.com/virchau13/tree-sitter-astro")                                                      ;;
+;;         (css "https://github.com/tree-sitter/tree-sitter-css")                                                        ;;
+;;         (typescript  "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")               ;;
+;;         (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")                              ;;
+;; ))                                                                                                                    ;;
+;;                                                                                                                       ;;
+;;   (setenv "PATH" (concat (getenv "PATH") "/home/bastian/.nvm/versions/node/v21.2.0/bin/astro-ls"))                    ;;
+;;   (add-to-list 'exec-path (expand-file-name "/home/bastian/.nvm/versions/node/v21.2.0/bin/"))                         ;;
+;;                                                                                                                       ;;
+;;   (setenv "PATH" (concat (getenv "PATH") "/home/bastian/.nvm/versions/node/v21.2.0/bin/tailwindcss-language-server")) ;;
+;;   (add-to-list 'exec-path (expand-file-name "/home/bastian/.nvm/versions/node/v21.2.0/bin/"))                         ;;
+;;                                                                                                                       ;;
+;; (define-derived-mode astro-mode astro-ts-mode "astro")                                                                ;;
+;;                                                                                                                       ;;
+;; (setq auto-mode-alist                                                                                                 ;;
+;;       (append '((".*\\.astro\\'" . astro-mode))                                                                       ;;
+;;               auto-mode-alist))                                                                                       ;;
+;;                                                                                                                       ;;
+;; (with-eval-after-load 'lsp-mode                                                                                       ;;
+;;   (add-to-list 'lsp-language-id-configuration                                                                         ;;
+;;                '(astro-mode . "astro"))                                                                               ;;
+;;                                                                                                                       ;;
+;;  (lsp-register-client                                                                                                 ;;
+;;    (make-lsp-client :new-connection (lsp-stdio-connection '("tailwindcss-language-server" "--stdio"))                 ;;
+;;                     :activation-fn (lsp-activate-on "astro" "blade")                                                  ;;
+;;                     :server-id 'tailwindcss-language-server                                                           ;;
+;;                     :add-on? t))                                                                                      ;;
+;; (lsp-register-client                                                                                                  ;;
+;;    (make-lsp-client :new-connection (lsp-stdio-connection '("astro-ls" "--stdio"))                                    ;;
+;;                     ;;:initialization-options '("./node_modules/typescript/lib")                                      ;;
+;;                     :activation-fn (lsp-activate-on "astro")                                                          ;;
+;;                     :server-id 'astro-ls                                                                              ;;
+;;                     :add-on? t))                                                                                      ;;
+;; )                                                                                                                     ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; ;; WEB MODE
 ;; (use-package web-mode
@@ -214,17 +218,21 @@
       (append '((".*\\.blade.php\\'" . blade-mode))
               auto-mode-alist))
 
-(use-package multi-vterm)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; (use-package multi-vterm :ensure t) ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package undo-fu-session
  :config
  (setq undo-fu-session-compression nil)
  )
 
-(use-package org-excalidraw
-  :config
-  (setq org-excalidraw-directory "~/Documents/org/excalidraw")
-)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; (use-package org-excalidraw                                    ;;
+;;   :config                                                      ;;
+;;   (setq org-excalidraw-directory "~/Documents/org/excalidraw") ;;
+;; )                                                              ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (after! mu4e
   (setq sendmail-program (executable-find "msmtp")
