@@ -39,6 +39,9 @@ opt.wrap = false
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+-- Options for PHP
+vim.g.lazyvim_php_lsp = "intelephense"
+
 -- Better splitting
 opt.splitbelow = true
 opt.splitright = true
