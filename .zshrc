@@ -116,5 +116,9 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+<<<<<<< HEAD
 PATH="$HOME/.emacs.d/bin:$PATH"
 export PATH="$HOME/.config/composer/vendor/bin:$PATH"
+=======
+PATH="$HOME/.config/emacs/bin:$PATH"
+>>>>>>> d8a4f8d5fdd91a1679618d511dd3bc97f6671d1f
