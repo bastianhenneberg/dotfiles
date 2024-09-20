@@ -27,6 +27,7 @@
   - [[#multi-vterm][Multi-Vterm]]
 - [[#undo-fu][Undo Fu]]
 - [[#excalidraw][Excalidraw]]
+- [[#mermaid-mode][Mermaid-Mode]]
 - [[#mu4e][Mu4e]]
 
 * Important Programms to Load first
@@ -340,6 +341,25 @@ Display the actual color as a background for any hex color value (ex. #ffffff). 
 ;; )                                                              ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+#+end_src
+
+* Mermaid-Mode
+#+begin_src emacs-lisp
+(use-package ob-mermaid
+  :config
+  (setq ob-mermaid-cli-path "/home/bastian/node_modules/.bin/mmdc")
+)
+
+(use-package mermaid-mode
+  :config
+  (setq mermaid-mmdc-location "/home/bastian/node_modules/.bin/mmdc")
+)
+
+ (org-babel-do-load-languages
+    'org-babel-load-languages
+    '((mermaid . t)
+      (scheme . t)
+      (your-other-langs . t)))
 #+end_src
 
 * Mu4e
