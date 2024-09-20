@@ -234,6 +234,22 @@
 ;; )                                                              ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(use-package ob-mermaid
+  :config
+  (setq ob-mermaid-cli-path "/home/bastian/node_modules/.bin/mmdc")
+)
+
+(use-package mermaid-mode
+  :config
+  (setq mermaid-mmdc-location "/home/bastian/node_modules/.bin/mmdc")
+)
+
+ (org-babel-do-load-languages
+    'org-babel-load-languages
+    '((mermaid . t)
+      (scheme . t)
+      (your-other-langs . t)))
+
 (after! mu4e
   (setq sendmail-program (executable-find "msmtp")
 	send-mail-function #'smtpmail-send-it
