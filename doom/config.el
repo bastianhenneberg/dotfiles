@@ -10,7 +10,9 @@
       :desc "Find File in Project"
       ":" #'projectile-find-file)
 
-(setq doom-theme 'doom-dracula)
+;; (setq doom-theme 'doom-dracula)
+(setq doom-theme 'catppuccin)
+(setq catppuccin-flavor 'macchiato) ;; or 'latte, 'macchiato, or 'mocha
 
 (setq display-line-numbers-type 'relative)
 
@@ -236,12 +238,12 @@
 
 (use-package ob-mermaid
   :config
-  (setq ob-mermaid-cli-path "/home/bastian/node_modules/.bin/mmdc")
+  (setq ob-mermaid-cli-path "/home/bastian/.nvm/versions/node/v20.16.0/bin/mmdc")
 )
 
 (use-package mermaid-mode
   :config
-  (setq mermaid-mmdc-location "/home/bastian/node_modules/.bin/mmdc")
+  (setq mermaid-mmdc-location "/home/bastian/.nvm/versions/node/v20.16.0/bin/mmdc")
 )
 
  (org-babel-do-load-languages
