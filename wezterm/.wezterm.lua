@@ -22,6 +22,8 @@ config.line_height = 1.5
 config.cell_width = 1.03
 -- config.font = wezterm.font('FiraCode Nerd Font', { weight = 'Medium', italic = false})
 
+config.enable_wayland = false
+
 config.font = wezterm.font("Fira Code Nerd Font")
 -- You can specify some parameters to influence the font selection;
 -- for example, this selects a Bold, Italic font variant.
