@@ -27,6 +27,8 @@ config.font = wezterm.font("Fira Code Nerd Font")
 -- for example, this selects a Bold, Italic font variant.
 config.font = wezterm.font("Fira Code Nerd Font", { weight = "Medium", italic = false })
 
+config.enable_wayland = false
+
 config.window_decorations = "NONE"
 config.window_padding = {
 	left = "5px",
