@@ -21,4 +21,5 @@
  '(org-level-4 ((t (:inherit outline-4 :height 1.06))))
  '(org-level-5 ((t (:inherit outline-5 :height 1.04))))
  '(org-level-6 ((t (:inherit outline-5 :height 1.02))))
- '(org-level-7 ((t (:inherit outline-5 :height 1.0)))))
+ '(org-level-7 ((t (:inherit outline-5 :height 1.0))))
+ '(org-todo ((t (:foreground "#04a5e5")))))

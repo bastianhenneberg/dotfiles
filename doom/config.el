@@ -14,6 +14,7 @@
 (setq doom-theme 'catppuccin)
 (setq catppuccin-flavor 'macchiato) ;; or 'latte, 'macchiato, or 'mocha
 
+
 (setq display-line-numbers-type 'relative)
 
 ;; Line Spacing for Emacs
@@ -142,7 +143,8 @@
  '(org-level-4 ((t (:inherit outline-4 :height 1.06))))
  '(org-level-5 ((t (:inherit outline-5 :height 1.04))))
  '(org-level-6 ((t (:inherit outline-5 :height 1.02))))
- '(org-level-7 ((t (:inherit outline-5 :height 1.00)))))
+ '(org-level-7 ((t (:inherit outline-5 :height 1.00))))
+ )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; (use-package! lsp-tailwindcss           ;;

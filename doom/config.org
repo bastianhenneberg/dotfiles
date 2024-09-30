@@ -60,6 +60,7 @@
 (setq doom-theme 'catppuccin)
 (setq catppuccin-flavor 'macchiato) ;; or 'latte, 'macchiato, or 'mocha
 
+
 (setq display-line-numbers-type 'relative)
 
 ;; Line Spacing for Emacs
@@ -80,7 +81,7 @@
 #+end_src
 
 #+RESULTS:
-| doom--customize-themes-h-85 | doom--customize-themes-h-86 |
+| doom--customize-themes-h-35 | doom--customize-themes-h-603 |
 
 ** Doom Modline
 #+begin_src emacs-lisp
@@ -223,7 +224,8 @@ Display the actual color as a background for any hex color value (ex. #ffffff). 
    '(org-level-4 ((t (:inherit outline-4 :height 1.06))))
    '(org-level-5 ((t (:inherit outline-5 :height 1.04))))
    '(org-level-6 ((t (:inherit outline-5 :height 1.02))))
-   '(org-level-7 ((t (:inherit outline-5 :height 1.00)))))
+   '(org-level-7 ((t (:inherit outline-5 :height 1.00))))
+   )
 #+end_src
 
 * LSP MODE

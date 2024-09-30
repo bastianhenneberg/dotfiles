@@ -1,6 +1,6 @@
 {
 	"layer": "top",
-	"modules-left": ["custom/launcher","cpu","memory","custom/media","tray"],
+	"modules-left": ["custom/launcher","cpu","memory","tray"],
 	"modules-center": ["hyprland/workspaces"],
 	"modules-right": ["custom/updates","custom/wallpaper","backlight","network","pulseaudio","clock", "battery", "hyprland/language", "custom/power"],
 	
@@ -77,34 +77,23 @@
         "format": " {}%",
         "max-length": 10
     },
-    "custom/media": {
-        "format": "{icon} {text}",
-        "return-type": "json",
-        "max-length": 40,
-        "format-icons": {
-            "spotify": "",
-            "default": "🎜"
-        },
-        "escape": true,
-        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
-        // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
-    },
     "custom/launcher":{
         "format": " ",
         "on-click": "rofi -show drun",
         "on-click-right": "killall rofi"
     },
-    "custom/power": {
-        "format" : "⏻ ",
-		"tooltip": false,
-		"menu": "on-click",
-		"menu-file": "$HOME/.config/waybar/power_menu.xml", // Menu file in resources folder
-		"menu-actions": {
-			"shutdown": "shutdown",
-			"reboot": "reboot",
-			"suspend": "systemctl suspend",
-			"hibernate": "systemctl hibernate"
-		},
+		//   "custom/power": {
+		//   "format" : "⏻ ",
+		// "tooltip": false,
+		// "menu": "on-click",
+		// "menu-file": "$HOME/.config/waybar/power_menu.xml", // Menu file in resources folder
+		// "menu-actions": {
+		// 	"shutdown": "shutdown",
+		// 	"reboot": "reboot",
+		// 	"suspend": "systemctl suspend",
+		// 	"hibernate": "systemctl hibernate"
+		// }
+		// },
     "custom/updates":{
         "format": "{} Update(s)",
         "exec": "checkupdates | wc -l",
@@ -120,10 +109,13 @@
         "format-linked": "{ifname} (No IP) ",
         "format-disconnected": "Disconnected ⚠",
         "format-alt": "{ifname}: {ipaddr}/{cidr}"
-    }
-    // "custom/wallpaper":{
-    //     "format":" ",
-    //     "on-click": "bash ~/.config/system_scripts/pkill_bc"
-    // }
-  }
+    },
+    "custom/wallpaper": {
+         "format":" ",
+         "on-click": "bash ~/dotfiles/scripts/swww_randomize.sh /home/bastian/dotfiles/wallpapers/"
+     },
+    "custom/power": {
+         "format":"⏻ ",
+         "on-click": "bash ~/dotfiles/scripts/powermenu.sh"
+     }
 }

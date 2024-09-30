@@ -232,7 +232,7 @@ window#waybar.hidden {
   margin-top: 6px;
   margin-left: 8px;
   padding-left: 10px;
-  padding-right: 10px;
+  padding-right: 7px;
   margin-bottom: 0px;
   border-radius: 10px;
   transition: none;
@@ -250,16 +250,4 @@ window#waybar.hidden {
   transition: none;
   color: #161320;
   background: #e8a2af;
-}
-
-#custom-media {
-  margin-top: 6px;
-  margin-left: 8px;
-  padding-left: 10px;
-  padding-right: 10px;
-  margin-bottom: 0px;
-  border-radius: 10px;
-  transition: none;
-  color: #161320;
-  background: #f2cdcd;
 }
