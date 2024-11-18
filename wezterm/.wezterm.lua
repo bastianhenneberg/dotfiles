@@ -10,6 +10,8 @@ if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
 
+max_fps = 60
+
 -- This is where you actually apply your config choices
 --
 -- Spawn a fish shell in login mode
