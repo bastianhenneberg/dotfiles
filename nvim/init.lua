@@ -22,9 +22,12 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup {
   require 'plugins.neotree',
   --  require 'plugins.colortheme',
+  require 'plugins.snacks',
   require 'plugins.bufferline',
+  require 'plugins.which-key',
   require 'plugins.cinnamon',
   require 'plugins.harpoon',
+  require 'plugins.markdown',
   require 'plugins.zen-mode',
   require 'plugins.ufo',
   require 'plugins.lualine',
@@ -34,13 +37,12 @@ require('lazy').setup {
   require 'plugins.autocompletion',
   require 'plugins.none-ls',
   require 'plugins.gitsigns',
-  require 'plugins.alpha',
+  --  require 'plugins.alpha',
   require 'plugins.indent-blankline',
   require 'plugins.misc',
   require 'plugins.comment',
   require 'plugins.noice',
   require 'plugins.catppuccin',
-  require 'plugins.vimwiki',
   require 'plugins.laravel',
   require 'plugins.blade-nav',
   require 'plugins.taskwarrior',
@@ -48,6 +50,7 @@ require('lazy').setup {
   require 'plugins.obsidian',
   require 'plugins.markdown-preview',
   require 'plugins.render-markdown',
+  require 'plugins.vimwiki',
 }
 
 -- The line beneath this is called `modeline`. See `:help modeline`

@@ -1,6 +1,6 @@
 # [Created by task 3.1.0 11/5/2024 22:18:50]
 data.location=/home/bastian/.task
-news.version=3.1.0
+news.version=3.2.0
 
 # To use the default location of the XDG directories,
 # move this configuration file from ~/.taskrc to ~/.config/task/taskrc and update location config as follows:
@@ -29,7 +29,7 @@ editor=nvim
 alias tui='taskwarrior-tui'
 uda.worker.type=string
 uda.worker.label=Mitarbeiter
-uda.worker.values=Bastian,Pauline,Kimberley,Tim,All
+uda.worker.values=Bastian,Pauline,Klaus,Tim,Chris,All
 
 uda.score.type=numeric
 uda.score.label=Score
@@ -43,3 +43,4 @@ report.next.columns=id,start.age,entry.age,depends.indicator,priority,project,ta
 report.next.labels=ID,Active,Age,D,P,Project,Tags,R,Sch,Due,Until,Description,Urg,worker,score
 
 
+context=work

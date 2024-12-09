@@ -2,7 +2,7 @@ return {
   'MeanderingProgrammer/render-markdown.nvim',
   after = { 'nvim-treesitter' },
   as = 'render-markdown',
-  dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
+  -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' },       -- if you use the mini.nvim suite
   -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
   dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
   ---@module 'render-markdown'
@@ -329,10 +329,10 @@ return {
         -- Correspond to top(3), delimiter(3), bottom(3), vertical, & horizontal
         -- stylua: ignore
         border = {
-            '┌', '┬', '┐',
-            '├', '┼', '┤',
-            '└', '┴', '┘',
-            '│', '─',
+          '┌', '┬', '┐',
+          '├', '┼', '┤',
+          '└', '┴', '┘',
+          '│', '─',
         },
         -- Gets placed in delimiter row for each column, position is based on alignment
         alignment_indicator = '━',
@@ -414,7 +414,7 @@ return {
       -- level of the heading. Indenting starts from level 2 headings onward.
       indent = {
         -- Turn on / off org-indent-mode
-        enabled = false,
+        enabled = true,
         -- Amount of additional padding added for each heading level
         per_level = 2,
         -- Heading levels <= this value will not be indented

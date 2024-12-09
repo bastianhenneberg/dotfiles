@@ -16,10 +16,8 @@ return {
     -- GitHub integration for vim-fugitive
     'tpope/vim-rhubarb',
   },
-  {
-    -- Hints keybinds
-    'folke/which-key.nvim',
-  },
+  -- Timer Component
+  { 'nvzone/timerly', cmd = 'TimerlyToggle', dependencies = { 'nvzone/volt' } },
   {
     -- Autoclose parentheses, brackets, quotes, etc.
     'windwp/nvim-autopairs',

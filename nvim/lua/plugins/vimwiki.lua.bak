@@ -1,0 +1,49 @@
+return {
+  { 'tools-life/taskwiki' },
+  {
+    'vimwiki/vimwiki',
+    init = function()
+      -- symbols for spaces, auto re-index tags db
+      vim.g.vimwiki_list = {
+        {
+          path = '~/vaults/work',
+          syntax = 'markdown',
+          ext = '.md',
+        },
+      }
+
+      vim.g.vimwiki_ext2syntax = {
+        ['.md'] = 'markdown',
+        ['.markdown'] = 'markdown',
+        ['.mdown'] = 'markdown',
+      }
+      vim.g.vimwiki_global_ext = 0 -- don't treat all md files as vimwiki
+
+      vim.g.vimwiki_folding = ''
+
+      vim.g.vimwiki_markdown_link_ext = 1
+      vim.g.taskwiki_markup_syntax = 'markdown'
+
+      -- Disable header levels keybindings so oil.nvim will work
+      vim.g.vimwiki_key_mappings = {
+        headers = 0,
+      }
+      -- vimwiki
+      vim.keymap.set('n', '<leader>nl', '<Plug>VimwikiNextLink', opts)
+      vim.keymap.set('n', '<leader>pl', '<Plug>VimwikiPrevLink', opts)
+
+      -- Syntax highlighting for code blocks
+      vim.g.vimwiki_syntax_plugins = {
+        codeblock = {
+          ['```lua'] = { parser = 'lua' },
+          ['```python'] = { parser = 'python' },
+          ['```javascript'] = { parser = 'javascript' },
+          ['```bash'] = { parser = 'bash' },
+          ['```html'] = { parser = 'html' },
+          ['```css'] = { parser = 'css' },
+          ['```c'] = { parser = 'c' },
+        },
+      }
+    end,
+  },
+}
