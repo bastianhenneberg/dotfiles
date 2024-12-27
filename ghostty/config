@@ -6,5 +6,5 @@ font-family-italic = "Victor Mono"
 font-family-bold-italic = "Victor Mono"
 cursor-style-blink = true
 adjust-cell-width=1
-adjust-cell-height=4
+adjust-cell-height=5
 background-opacity=1
