@@ -51,6 +51,7 @@ require('lazy').setup {
   require 'plugins.markdown-preview',
   require 'plugins.render-markdown',
   require 'plugins.vimwiki',
+  require 'plugins.orgmode',
 }
 
 -- The line beneath this is called `modeline`. See `:help modeline`

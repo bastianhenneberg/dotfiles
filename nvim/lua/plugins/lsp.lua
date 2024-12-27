@@ -185,6 +185,7 @@ return {
       tailwindcss = {},
       dockerls = {},
       sqlls = {},
+      prettier = {},
       terraformls = {},
       jsonls = {},
       yamlls = {},
