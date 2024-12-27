@@ -21,7 +21,7 @@ config.default_prog = { "/bin/zsh", "-l" }
 -- config.color_scheme = "Dracula"
 config.color_scheme = "Catppuccin Mocha"
 config.font_size = 14
-config.line_height = 1.4
+config.line_height = 1.3
 config.cell_width = 1.1
 -- config.font = wezterm.font('FiraCode Nerd Font', { weight = 'Medium', italic = false})
 
