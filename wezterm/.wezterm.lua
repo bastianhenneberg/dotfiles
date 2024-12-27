@@ -18,7 +18,8 @@ max_fps = 60
 config.default_prog = { "/bin/zsh", "-l" }
 
 -- For example, changing the color scheme:
-config.color_scheme = "Dracula"
+-- config.color_scheme = "Dracula"
+config.color_scheme = "Catppuccin Mocha"
 config.font_size = 14
 config.line_height = 1.4
 config.cell_width = 1.1
