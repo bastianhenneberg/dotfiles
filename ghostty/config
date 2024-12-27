@@ -1,3 +1,7 @@
 theme = catppuccin-mocha
-font-family = "Fira Code Nerd Font"
 font-size = 14
+font-family = "Victor Mono Regular"
+font-family-bold = "Victor Mono Bold"
+font-family-italic = "Victor Mono Italic"
+font-family-bold-italic = "Victor Mono Italic"
+cursor-style-blink = true

@@ -19,17 +19,21 @@ config.default_prog = { "/bin/zsh", "-l" }
 
 -- For example, changing the color scheme:
 config.color_scheme = "Dracula"
-config.font_size = 12
-config.line_height = 1.5
-config.cell_width = 1.03
+config.font_size = 13
+config.line_height = 1.4
+config.cell_width = 1.01
 -- config.font = wezterm.font('FiraCode Nerd Font', { weight = 'Medium', italic = false})
 
 config.enable_wayland = false
 
-config.font = wezterm.font("Fira Code Nerd Font")
+config.font = wezterm.font("Victor Mono Regular")
+-- config.font = wezterm.font("Fira Code Nerd Font")
 -- You can specify some parameters to influence the font selection;
 -- for example, this selects a Bold, Italic font variant.
-config.font = wezterm.font("Fira Code Nerd Font", { weight = "Medium", italic = false })
+config.font = wezterm.font("Victor Mono Bold Italic", { weight = "Bold", italic = true })
+config.font = wezterm.font("Victor Mono Bold", { weight = "Bold" })
+config.font = wezterm.font("Victor Mono Medium", { weight = "Medium" })
+-- config.font = wezterm.font("Fira Code Nerd Font", { weight = "Medium", italic = false })
 
 config.enable_wayland = false
 
