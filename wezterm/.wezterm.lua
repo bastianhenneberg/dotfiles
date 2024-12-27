@@ -19,9 +19,9 @@ config.default_prog = { "/bin/zsh", "-l" }
 
 -- For example, changing the color scheme:
 config.color_scheme = "Dracula"
-config.font_size = 13
+config.font_size = 14
 config.line_height = 1.4
-config.cell_width = 1.01
+config.cell_width = 1.1
 -- config.font = wezterm.font('FiraCode Nerd Font', { weight = 'Medium', italic = false})
 
 config.enable_wayland = false

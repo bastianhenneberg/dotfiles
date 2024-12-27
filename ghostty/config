@@ -1,7 +1,7 @@
 theme = catppuccin-mocha
 font-size = 14
-font-family = "Victor Mono Regular"
-font-family-bold = "Victor Mono Bold"
-font-family-italic = "Victor Mono Italic"
-font-family-bold-italic = "Victor Mono Italic"
+font-family = "Victor Mono"
+font-family-bold = "Victor Mono"
+font-family-italic = "Victor Mono"
+font-family-bold-italic = "Victor Mono"
 cursor-style-blink = true
