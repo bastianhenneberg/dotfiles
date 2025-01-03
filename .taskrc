@@ -20,13 +20,16 @@ news.version=3.2.0
 #include dark-yellow-green.theme
 #include dark-gray-256.theme
 #include dark-gray-blue-256.theme
-include solarized-dark-256.theme
+#include solarized-dark-256.theme
 #include solarized-light-256.theme
 #include no-color.theme
+include bubblegum-256.theme
+uda.taskwarrior-tui.selection.blink=yes
+uda.taskwarrior-tui.selection.reverse=yes
+uda.taskwarrior-tui.selection.italic=yes
 
 editor=nvim
 
-alias tui='taskwarrior-tui'
 uda.worker.type=string
 uda.worker.label=Mitarbeiter
 uda.worker.values=Bastian,Pauline,Klaus,Tim,Chris,All
@@ -35,12 +38,12 @@ uda.score.type=numeric
 uda.score.label=Score
 uda.score.default=10
 uda.score.values=5,10,25,50,75,100
-context.work.read=+work or +office or +production
+context.work.read=+work or +office or +production or +coding
+context.private.read=+private
 report.list.columns=id,start.age,entry.age,depends.indicator,priority,project,tags,recur.indicator,scheduled.countdown,due,until.age,description.count,urgency,worker,score
 report.list.labels=ID,Active,Age,D,P,Project,Tags,R,Sch,Due,Until,Description,Urg,worker,score
 
 report.next.columns=id,start.age,entry.age,depends.indicator,priority,project,tags,recur.indicator,scheduled.countdown,due,until.age,description.count,urgency,worker,score
 report.next.labels=ID,Active,Age,D,P,Project,Tags,R,Sch,Due,Until,Description,Urg,worker,score
 
-
-context=work
+color=on

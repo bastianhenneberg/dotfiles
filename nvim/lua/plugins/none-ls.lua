@@ -26,7 +26,7 @@ return {
 
     local sources = {
       diagnostics.checkmake,
-      formatting.prettier.with { filetypes = { 'html', 'json', 'yaml', 'markdown' } },
+      formatting.prettier.with { filetypes = { 'html', 'json', 'yaml', 'markdown', 'typescript', 'javascript', 'tsx', 'jsx', 'typescriptreact' } },
       formatting.pretty_php.with { filetypes = { 'php' } },
       formatting.blade_formatter.with { filetypes = { 'blade', 'blade.php' } },
       formatting.stylua,
