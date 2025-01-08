@@ -180,7 +180,7 @@ return {
           },
         },
       },
-      html = { filetypes = { 'html', 'twig', 'hbs' } },
+      html = { filetypes = { 'html', 'twig', 'hbs', 'blade' } },
       cssls = {},
       tailwindcss = {},
       dockerls = {},
