@@ -189,6 +189,8 @@ return {
       terraformls = {},
       jsonls = {},
       yamlls = {},
+      intelephense = {},
+      emmet_language_server = { filetypes = { 'blade' } },
 
       lua_ls = {
         -- cmd = {...},
