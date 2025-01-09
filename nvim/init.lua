@@ -46,7 +46,7 @@ require('lazy').setup {
   require 'plugins.laravel',
   require 'plugins.blade-nav',
   require 'plugins.taskwarrior',
-  --  require 'plugins.tailwind-fold',
+  require 'plugins.tailwind-fold',
   require 'plugins.obsidian',
   require 'plugins.markdown-preview',
   require 'plugins.render-markdown',

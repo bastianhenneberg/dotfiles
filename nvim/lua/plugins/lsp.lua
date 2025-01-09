@@ -180,7 +180,7 @@ return {
           },
         },
       },
-      html = { filetypes = { 'html', 'twig', 'hbs' } },
+      html = { filetypes = { 'html', 'twig', 'hbs', 'blade' } },
       cssls = {},
       tailwindcss = {},
       dockerls = {},
@@ -189,6 +189,8 @@ return {
       terraformls = {},
       jsonls = {},
       yamlls = {},
+      intelephense = {},
+      emmet_language_server = { filetypes = { 'blade' } },
 
       lua_ls = {
         -- cmd = {...},

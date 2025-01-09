@@ -13,31 +13,39 @@
       "alignment": "left",
       "segments": [
         {
-          "style": "plain",
+          "properties": {
+            "cache_duration": "none"
+          },
           "template": "{{.Icon}} ",
           "foreground": "p:os",
-          "type": "os"
-        },
-        {
-          "style": "plain",
-          "template": "{{ .UserName }}@{{ .HostName }} ",
-          "foreground": "p:blue",
-          "type": "session"
+          "type": "os",
+          "style": "plain"
         },
         {
           "properties": {
+            "cache_duration": "none"
+          },
+          "template": "{{ .UserName }}@{{ .HostName }} ",
+          "foreground": "p:blue",
+          "type": "session",
+          "style": "plain"
+        },
+        {
+          "properties": {
+            "cache_duration": "none",
             "folder_icon": "..\ue5fe..",
             "home_icon": "~",
             "style": "agnoster_short"
           },
-          "style": "plain",
           "template": "{{ .Path }} ",
           "foreground": "p:pink",
-          "type": "path"
+          "type": "path",
+          "style": "plain"
         },
         {
           "properties": {
             "branch_icon": "\ue725 ",
+            "cache_duration": "none",
             "cherry_pick_icon": "\ue29b ",
             "commit_icon": "\uf417 ",
             "fetch_status": false,
@@ -48,16 +56,19 @@
             "revert_icon": "\uf0e2 ",
             "tag_icon": "\uf412 "
           },
-          "style": "plain",
           "template": "{{ .HEAD }} ",
           "foreground": "p:lavender",
-          "type": "git"
+          "type": "git",
+          "style": "plain"
         },
         {
-          "style": "plain",
+          "properties": {
+            "cache_duration": "none"
+          },
           "template": "\uf105",
           "foreground": "p:closer",
-          "type": "text"
+          "type": "text",
+          "style": "plain"
         }
       ]
     }
