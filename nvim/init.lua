@@ -37,6 +37,7 @@ require('lazy').setup {
   require 'plugins.autocompletion',
   require 'plugins.none-ls',
   require 'plugins.gitsigns',
+  require 'plugins.twilight',
   --  require 'plugins.alpha',
   require 'plugins.indent-blankline',
   require 'plugins.misc',
