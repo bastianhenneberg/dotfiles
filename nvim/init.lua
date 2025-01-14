@@ -38,6 +38,7 @@ require('lazy').setup {
   require 'plugins.none-ls',
   require 'plugins.gitsigns',
   require 'plugins.twilight',
+  require 'plugins.flash',
   --  require 'plugins.alpha',
   require 'plugins.indent-blankline',
   require 'plugins.misc',
