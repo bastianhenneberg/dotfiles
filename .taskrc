@@ -46,6 +46,8 @@ report.list.labels=ID,Active,Age,D,P,Project,Tags,R,Sch,Due,Until,Description,Ur
 report.next.columns=id,start.age,entry.age,depends.indicator,priority,project,tags,recur.indicator,scheduled.countdown,due,until.age,description.count,urgency,worker,score
 report.next.labels=ID,Active,Age,D,P,Project,Tags,R,Sch,Due,Until,Description,Urg,worker,score
 
+# Taskwarrior TUI Shortcuts
 uda.taskwarrior-tui.shortcuts.1=~/dotfiles/taskwarrior-tui/taskopen-annotation.sh
 
 color=on
+context=work
