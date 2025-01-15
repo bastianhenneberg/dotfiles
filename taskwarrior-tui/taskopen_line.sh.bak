@@ -26,6 +26,15 @@ FILE_NAME=$(basename "$FILE_PATH" | awk -F '.' '{print $1}')
 DIR_NAME=$(dirname "$FILE_PATH")
 
 # Create a new tmux session which opens the file with neovim at the specific line number and highlighting it
-nvim +$LINE_NUMBER $FILE_PATH
+cd "$DIR_NAME" && tmux new-session -d -s "$FILE_NAME" "direnv exec . $SHELL -c 'nvim +$LINE_NUMBER $FILE_PATH'"
 
+# Attach to the new session
+tmux switch-client -t "$FILE_NAME"
 
+# Wait for the session to be closed, either by the user or some other way
+while tmux has-session -t "$FILE_NAME" 2>/dev/null; do
+	sleep 1
+done
+
+# Switch back to the original session
+tmux switch-client -t "$current_session"
