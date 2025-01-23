@@ -23,6 +23,7 @@ require('lazy').setup {
   require 'plugins.neotree',
   --  require 'plugins.colortheme',
   require 'plugins.snacks',
+  require 'plugins.rust',
   require 'plugins.session',
   require 'plugins.bufferline',
   require 'plugins.which-key',
