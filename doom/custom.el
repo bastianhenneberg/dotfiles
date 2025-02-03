@@ -6,7 +6,7 @@
  '(magit-todos-insert-after '(bottom) nil nil "Changed by setter of obsolete option `magit-todos-insert-at'")
  '(org-safe-remote-resources '("\\`https://fniessen\\.github\\.io\\(?:/\\|\\'\\)"))
  '(package-selected-packages
-   '(catppuccin-theme org-inline-pdf org-pdftools pdf-tools mermaid-mode ob-mermaid))
+   '(multi-vterm catppuccin-theme org-inline-pdf org-pdftools pdf-tools mermaid-mode ob-mermaid))
  '(warning-suppress-types '((lsp-mode) (defvaralias))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

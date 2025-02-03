@@ -22,7 +22,7 @@
 
 ;; Settings for Font Family and Size
 ;;(setq doom-font (font-spec :family "MesloLGL Nerd Font Mono" :size 16))
-(setq doom-font (font-spec :family "Fira Code Nerd Font Mono" :size 17))
+(setq doom-font (font-spec :family "Victor Mono Medium" :size 17))
 
 (after! doom-themes
   (setq doom-themes-enable-bold t
@@ -82,16 +82,16 @@
   :hook
   ((org-mode prog-mode) . rainbow-mode))
 
-(setq org-directory "~/Dokumente/org/"
+(setq org-directory "~/vaults/org/"
       org-hide-emphasis-markers t
       org-log-done 'time
-      org-archive-location "~/Dokumente/org/archive/archive.org::)"
+      org-archive-location "~/vaults/org/archive/archive.org::)"
      ;;org-superstar-headline-bullets-list '("◉" "○" "⁖" "✸" "✿")
       )
 (add-to-list 'org-modules 'org-habit t)
 
 (after! org
-  (setq org-agenda-files '("~/Dokumente/org/org-roam/habit/" "~/Dokumente/org/org-roam/list/"))
+  (setq org-agenda-files '("~/vaults/org/org-roam/habit/" "~/vaults/org/org-roam/list/" "~/vaults/org/notes.org"))
   (setq org-agenda-include-diary t)
   (setq org-habit-show-all-today t)
   (setq org-habit-following-days 7
@@ -106,7 +106,7 @@
 
 (use-package org-roam
   :custom
-  (org-roam-directory (file-truename "~/Dokumente/org/org-roam"))
+  (org-roam-directory (file-truename "~/vaults/org/org-roam"))
   (org-roam-complete-everywhere t)
   :bind (("C-c n l" . org-roam-buffer-toggle)
          ("C-c n f" . org-roam-node-find)
@@ -117,21 +117,21 @@
          ("C-c n j" . org-roam-dailies-capture-today))
   :config
   (setq org-roam-dailies-capture-templates
-      '(("s" "daily" entry (file "~/Dokumente/org/org-roam/templates/daily.org")
+      '(("s" "daily" entry (file "~/vaults/org/org-roam/templates/daily.org")
          :target (file+head "%<%Y-%m-%d>.org" "%<%Y-%m-%d>\n"))
         ))
   (setq org-roam-capture-templates
-        '(("a" "workstuff" plain (file "~/Dokumente/org/org-roam/templates/customer.org")
+        '(("a" "workstuff" plain (file "~/vaults/org/org-roam/templates/customer.org")
         :target (file+head "customer/${slug}.org" "${title}\n") :unnarrowed t)
-        ("b" "project" plain (file "~/Dokumente/org/org-roam/templates/project.org")
+        ("b" "project" plain (file "~/vaults/org/org-roam/templates/project.org")
         :target (file+head "project/${slug}.org" "${title}\n") :unnarrowed t)
-        ("h" "habit" plain (file "~/Dokumente/org/org-roam/templates/habit.org")
+        ("h" "habit" plain (file "~/vaults/org/org-roam/templates/habit.org")
         :target (file+head "habit/${slug}.org" "${title}\n") :unnarrowed t)
-        ("d" "default" plain (file "~/Dokumente/org/org-roam/templates/default.org")
+        ("d" "default" plain (file "~/vaults/org/org-roam/templates/default.org")
         :target (file+head "${slug}.org" "${title}\n") :unnarrowed t)
-        ("l" "list" plain (file "~/Dokumente/org/org-roam/templates/list.org")
+        ("l" "list" plain (file "~/vaults/org/org-roam/templates/list.org")
         :target (file+head "list/${slug}.org" "${title}\n") :unnarrowed t)
-        ("c" "contact" plain (file "~/Dokumente/org/org-roam/templates/contact.org")
+        ("c" "contact" plain (file "~/vaults/org/org-roam/templates/contact.org")
         :target (file+head "contact/${slug}.org" "${title}\n") :unnarrowed t)
         ))
 )
@@ -222,9 +222,9 @@
       (append '((".*\\.blade.php\\'" . blade-mode))
               auto-mode-alist))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; (use-package multi-vterm :ensure t) ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(use-package multi-vterm :ensure t) ;;
+
+(add-hook 'vterm-mode-hook 'evil-emacs-state)
 
 (use-package undo-fu-session
  :config
