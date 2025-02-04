@@ -8,7 +8,6 @@
 - [[#important-programms-to-load-first][Important Programms to Load first]]
   - [[#adding-the-scripts-directory-to-path][Adding the scripts directory to path]]
   - [[#sourcing-the-scripts][Sourcing the scripts]]
-  - [[#taskwarriorel][Taskwarrior.el]]
   - [[#keymaps][Keymaps]]
 - [[#doom-emacs-config][DOOM Emacs Config]]
   - [[#doom-modline][Doom Modline]]
@@ -159,12 +158,18 @@ Display the actual color as a background for any hex color value (ex. #ffffff). 
      ;;org-superstar-headline-bullets-list '("◉" "○" "⁖" "✸" "✿")
       )
 (add-to-list 'org-modules 'org-habit t)
+
+;; (setq org-todo-keyword-faces
+;;    '(("TODO"        . (:background "black"   :foreground "red"
+;;                        :weight bold))
+;; ))
+
 #+end_src
 
 ** Org Agenda
 #+begin_src emacs-lisp
 (after! org
-  (setq org-agenda-files '("~/vaults/org/org-roam/habit/" "~/vaults/org/org-roam/list/" "~/vaults/org/notes.org"))
+  (setq org-agenda-files '("~/vaults/org/org-roam/habit/" "~/vaults/org/org-roam/list/" "~/vaults/org/org-roam/customer/"))
   (setq org-agenda-include-diary t)
   (setq org-habit-show-all-today t)
   (setq org-habit-following-days 7
@@ -353,9 +358,8 @@ Display the actual color as a background for any hex color value (ex. #ffffff). 
 ** Multi-Vterm
 #+begin_src emacs-lisp
 
-(use-package multi-vterm :ensure t) ;;
-
-(add-hook 'vterm-mode-hook 'evil-emacs-state)
+;; (use-package multi-vterm :ensure t)
+;; (add-hook 'vterm-mode-hook 'evil-emacs-state)
 
 #+end_src
 
@@ -385,10 +389,10 @@ Display the actual color as a background for any hex color value (ex. #ffffff). 
   (setq ob-mermaid-cli-path "/home/bastian/.nvm/versions/node/v20.16.0/bin/mmdc")
 )
 
-(use-package mermaid-mode
-  :config
-  (setq mermaid-mmdc-location "/home/bastian/.nvm/versions/node/v20.16.0/bin/mmdc")
-)
+;; (use-package mermaid-mode
+;;   :config
+;;   (setq mermaid-mmdc-location "/home/bastian/.nvm/versions/node/v20.16.0/bin/mmdc")
+;; )
 
  (org-babel-do-load-languages
     'org-babel-load-languages

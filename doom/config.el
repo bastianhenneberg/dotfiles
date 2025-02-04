@@ -90,8 +90,13 @@
       )
 (add-to-list 'org-modules 'org-habit t)
 
+;; (setq org-todo-keyword-faces
+;;    '(("TODO"        . (:background "black"   :foreground "red"
+;;                        :weight bold))
+;; ))
+
 (after! org
-  (setq org-agenda-files '("~/vaults/org/org-roam/habit/" "~/vaults/org/org-roam/list/" "~/vaults/org/notes.org"))
+  (setq org-agenda-files '("~/vaults/org/org-roam/habit/" "~/vaults/org/org-roam/list/" "~/vaults/org/org-roam/customer/"))
   (setq org-agenda-include-diary t)
   (setq org-habit-show-all-today t)
   (setq org-habit-following-days 7
@@ -242,9 +247,8 @@
       (append '((".*\\.blade.php\\'" . blade-mode))
               auto-mode-alist))
 
-(use-package multi-vterm :ensure t) ;;
-
-(add-hook 'vterm-mode-hook 'evil-emacs-state)
+;; (use-package multi-vterm :ensure t)
+;; (add-hook 'vterm-mode-hook 'evil-emacs-state)
 
 (use-package undo-fu-session
  :config
@@ -263,10 +267,10 @@
   (setq ob-mermaid-cli-path "/home/bastian/.nvm/versions/node/v20.16.0/bin/mmdc")
 )
 
-(use-package mermaid-mode
-  :config
-  (setq mermaid-mmdc-location "/home/bastian/.nvm/versions/node/v20.16.0/bin/mmdc")
-)
+;; (use-package mermaid-mode
+;;   :config
+;;   (setq mermaid-mmdc-location "/home/bastian/.nvm/versions/node/v20.16.0/bin/mmdc")
+;; )
 
  (org-babel-do-load-languages
     'org-babel-load-languages
