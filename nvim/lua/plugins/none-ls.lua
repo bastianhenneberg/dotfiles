@@ -20,13 +20,14 @@ return {
         'ruff', -- Python linter and formatter
         'pretty-php', -- PHP Formatter
         'blade-formatter', -- Blade Formatter
+        'astro-ls', --Astro Formatter,
       },
       automatic_installation = true,
     }
 
     local sources = {
       diagnostics.checkmake,
-      formatting.prettier.with { filetypes = { 'html', 'json', 'yaml', 'markdown', 'typescript', 'javascript', 'tsx', 'jsx', 'typescriptreact' } },
+      formatting.prettier.with { filetypes = { 'html', 'json', 'yaml', 'markdown', 'typescript', 'javascript', 'tsx', 'jsx', 'typescriptreact', 'astro' } },
       formatting.pretty_php.with { filetypes = { 'php' } },
       formatting.blade_formatter.with { filetypes = { 'blade', 'blade.php' } },
       formatting.stylua,

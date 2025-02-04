@@ -67,7 +67,7 @@ function M.create_or_update_task()
   end
 end
 
-vim.api.nvim_set_keymap('i', '<C-T>', "<Cmd>lua require('user_functions.tasks').create_or_update_task()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', '<C-z>', "<Cmd>lua require('user_functions.tasks').create_or_update_task()<CR>", { noremap = true, silent = true })
 -- vim.api.nvim_set_keymap('n', '<leader>ll', "<Cmd>lua require('user_functions.tasks').create_or_update_task()<CR>", { noremap = true, silent = true })
 
 function M.mark_task_done()

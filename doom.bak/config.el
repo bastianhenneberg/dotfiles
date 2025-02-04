@@ -1,52 +1,7 @@
-#+TITLE: DOOM GNU Emacs Config
-#+AUTHOR: Bastian Henneberg
-#+DESCRIPTION: My personal Emacs configuration.
-#+STARTUP: showeverything
-#+OPTIONS: toc:2
-
-* Table of Contents :toc:
-- [[#important-programms-to-load-first][Important Programms to Load first]]
-  - [[#adding-the-scripts-directory-to-path][Adding the scripts directory to path]]
-  - [[#sourcing-the-scripts][Sourcing the scripts]]
-  - [[#taskwarriorel][Taskwarrior.el]]
-  - [[#keymaps][Keymaps]]
-- [[#doom-emacs-config][DOOM Emacs Config]]
-  - [[#doom-modline][Doom Modline]]
-- [[#rainbow-delimiters][RAINBOW DELIMITERS]]
-- [[#rainbow-mode][RAINBOW MODE]]
-- [[#org-mode][ORG MODE]]
-  - [[#org][Org]]
-  - [[#org-agenda][Org Agenda]]
-  - [[#enabling-table-of-contents][Enabling table of contents]]
-  - [[#org-roam][Org Roam]]
-  - [[#org-level-headers][Org Level Headers]]
-- [[#lsp-mode][LSP MODE]]
-  - [[#tailwindcss][TailwindCSS]]
-  - [[#avy][avy]]
-  - [[#astro-mode][Astro Mode]]
-  - [[#blade-mode][Blade Mode]]
-- [[#terminals][Terminals]]
-  - [[#multi-vterm][Multi-Vterm]]
-- [[#undo-fu][Undo Fu]]
-- [[#excalidraw][Excalidraw]]
-- [[#mermaid-mode][Mermaid-Mode]]
-- [[#mu4e][Mu4e]]
-
-* Important Programms to Load first
-** Adding the scripts directory to path
-#+begin_src emacs-lisp
 (add-to-list 'load-path "~/.config/doom/scripts/")
 
-#+end_src
-
-** Sourcing the scripts
-#+begin_src emacs-lisp
 (require 'buffer-move)   ;; Buffer-move for better window management
 
-#+end_src
-
-** Keymaps
-#+begin_src emacs-lisp
 (map! :leader
       :desc "M-x"
       "SPC" #'execute-extended-command)
@@ -54,10 +9,7 @@
 (map! :leader
       :desc "Find File in Project"
       ":" #'projectile-find-file)
-#+end_src
 
-* DOOM Emacs Config
-#+begin_src emacs-lisp
 ;; (setq doom-theme 'doom-dracula)
 (setq doom-theme 'catppuccin)
 (setq catppuccin-flavor 'macchiato) ;; or 'latte, 'macchiato, or 'mocha
@@ -70,7 +22,7 @@
 
 ;; Settings for Font Family and Size
 ;;(setq doom-font (font-spec :family "MesloLGL Nerd Font Mono" :size 16))
-(setq doom-font (font-spec :family "Victor Mono Medium" :size 17))
+(setq doom-font (font-spec :family "Fira Code Nerd Font Mono" :size 17))
 
 (after! doom-themes
   (setq doom-themes-enable-bold t
@@ -80,13 +32,6 @@
   '(font-lock-comment-face :slant italic)
   '(font-lock-keyword-face :slant italic))
 
-#+end_src
-
-#+RESULTS:
-| doom--customize-themes-h-35 | doom--customize-themes-h-603 |
-
-** Doom Modline
-#+begin_src emacs-lisp
 ;; If the actual char height is larger, it respects the actual height.
 (setq doom-modeline-height 50)
 ;; How wide the mode-line bar should be. It's only respected in GUI.
@@ -128,43 +73,25 @@
 ;; Whether display the live icons of time.
 ;; It respects option `doom-modeline-icon' and option `doom-modeline-time-icon'.
 (setq doom-modeline-time-live-icon t)
-#+end_src
 
-* RAINBOW DELIMITERS
-Adding rainbow coloring to parentheses.
-
-#+begin_src emacs-lisp
 (use-package rainbow-delimiters
   :hook ((emacs-lisp-mode . rainbow-delimiters-mode)
          (clojure-mode . rainbow-delimiters-mode)))
-#+end_src
 
-* RAINBOW MODE
-Display the actual color as a background for any hex color value (ex. #ffffff).  The code block below enables rainbow-mode in all programming modes (prog-mode) as well as org-mode, which is why rainbow works in this document.
-
-#+begin_src emacs-lisp
 (use-package rainbow-mode
   :hook
   ((org-mode prog-mode) . rainbow-mode))
-#+end_src
 
-
-* ORG MODE
-** Org
-#+begin_src emacs-lisp
-(setq org-directory "~/vaults/org/"
+(setq org-directory "~/Dokumente/org/"
       org-hide-emphasis-markers t
       org-log-done 'time
-      org-archive-location "~/vaults/org/archive/archive.org::)"
+      org-archive-location "~/Dokumente/org/archive/archive.org::)"
      ;;org-superstar-headline-bullets-list '("◉" "○" "⁖" "✸" "✿")
       )
 (add-to-list 'org-modules 'org-habit t)
-#+end_src
 
-** Org Agenda
-#+begin_src emacs-lisp
 (after! org
-  (setq org-agenda-files '("~/vaults/org/org-roam/habit/" "~/vaults/org/org-roam/list/" "~/vaults/org/notes.org"))
+  (setq org-agenda-files '("~/Dokumente/org/org-roam/habit/" "~/Dokumente/org/org-roam/list/"))
   (setq org-agenda-include-diary t)
   (setq org-habit-show-all-today t)
   (setq org-habit-following-days 7
@@ -172,21 +99,14 @@ Display the actual color as a background for any hex color value (ex. #ffffff). 
         org-habit-show-habits t)
   (setq org-log-into-drawer "LOGBOOK")
   )
-#+end_src
 
+(use-package toc-org
+  :commands toc-org-mode
+  :init (add-hook 'org-mode-hook 'toc-org-enable))
 
-** Enabling table of contents
-#+begin_src emacs-lisp
-  (use-package toc-org
-    :commands toc-org-mode
-    :init (add-hook 'org-mode-hook 'toc-org-enable))
-#+end_src
-
-** Org Roam
-#+begin_src emacs-lisp
 (use-package org-roam
   :custom
-  (org-roam-directory (file-truename "~/vaults/org/org-roam"))
+  (org-roam-directory (file-truename "~/Dokumente/org/org-roam"))
   (org-roam-complete-everywhere t)
   :bind (("C-c n l" . org-roam-buffer-toggle)
          ("C-c n f" . org-roam-node-find)
@@ -197,80 +117,52 @@ Display the actual color as a background for any hex color value (ex. #ffffff). 
          ("C-c n j" . org-roam-dailies-capture-today))
   :config
   (setq org-roam-dailies-capture-templates
-      '(("s" "daily" entry (file "~/vaults/org/org-roam/templates/daily.org")
+      '(("s" "daily" entry (file "~/Dokumente/org/org-roam/templates/daily.org")
          :target (file+head "%<%Y-%m-%d>.org" "%<%Y-%m-%d>\n"))
         ))
   (setq org-roam-capture-templates
-        '(("a" "workstuff" plain (file "~/vaults/org/org-roam/templates/customer.org")
+        '(("a" "workstuff" plain (file "~/Dokumente/org/org-roam/templates/customer.org")
         :target (file+head "customer/${slug}.org" "${title}\n") :unnarrowed t)
-        ("b" "project" plain (file "~/vaults/org/org-roam/templates/project.org")
+        ("b" "project" plain (file "~/Dokumente/org/org-roam/templates/project.org")
         :target (file+head "project/${slug}.org" "${title}\n") :unnarrowed t)
-        ("h" "habit" plain (file "~/vaults/org/org-roam/templates/habit.org")
+        ("h" "habit" plain (file "~/Dokumente/org/org-roam/templates/habit.org")
         :target (file+head "habit/${slug}.org" "${title}\n") :unnarrowed t)
-        ("d" "default" plain (file "~/vaults/org/org-roam/templates/default.org")
+        ("d" "default" plain (file "~/Dokumente/org/org-roam/templates/default.org")
         :target (file+head "${slug}.org" "${title}\n") :unnarrowed t)
-        ("l" "list" plain (file "~/vaults/org/org-roam/templates/list.org")
+        ("l" "list" plain (file "~/Dokumente/org/org-roam/templates/list.org")
         :target (file+head "list/${slug}.org" "${title}\n") :unnarrowed t)
-        ("c" "contact" plain (file "~/vaults/org/org-roam/templates/contact.org")
+        ("c" "contact" plain (file "~/Dokumente/org/org-roam/templates/contact.org")
         :target (file+head "contact/${slug}.org" "${title}\n") :unnarrowed t)
         ))
 )
-#+end_src
 
-** Org Level Headers
-#+begin_src emacs-lisp
-  (custom-set-faces
-   '(org-level-1 ((t (:inherit outline-1 :height 1.15))))
-   '(org-level-2 ((t (:inherit outline-2 :height 1.10))))
-   '(org-level-3 ((t (:inherit outline-3 :height 1.08))))
-   '(org-level-4 ((t (:inherit outline-4 :height 1.06))))
-   '(org-level-5 ((t (:inherit outline-5 :height 1.04))))
-   '(org-level-6 ((t (:inherit outline-5 :height 1.02))))
-   '(org-level-7 ((t (:inherit outline-5 :height 1.00))))
-   )
-#+end_src
+(custom-set-faces
+ '(org-level-1 ((t (:inherit outline-1 :height 1.15))))
+ '(org-level-2 ((t (:inherit outline-2 :height 1.10))))
+ '(org-level-3 ((t (:inherit outline-3 :height 1.08))))
+ '(org-level-4 ((t (:inherit outline-4 :height 1.06))))
+ '(org-level-5 ((t (:inherit outline-5 :height 1.04))))
+ '(org-level-6 ((t (:inherit outline-5 :height 1.02))))
+ '(org-level-7 ((t (:inherit outline-5 :height 1.00))))
+ )
 
-* LSP MODE
-** TailwindCSS
-#+begin_src emacs-lisp
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; (use-package! lsp-tailwindcss           ;;
 ;;   :init                                 ;;
 ;;   (setq lsp-tailwindcss-add-on-mode t)) ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-#+end_src
+(use-package! astro-ts-mode
+  :config
+  (global-treesit-auto-mode)
+  (let ((astro-recipe (make-treesit-auto-recipe
+                       :lang 'astro
+                       :ts-mode 'astro-ts-mode
+                       :url "https://github.com/virchau13/tree-sitter-astro"
+                       :revision "master"
+                       :source-dir "src")))
+    (add-to-list 'treesit-auto-recipe-list astro-recipe)))
 
-#+begin_src emacs-lisp
-
-(setq treesit-language-source-alist
-   '((bash "https://github.com/tree-sitter/tree-sitter-bash")
-     (cmake "https://github.com/uyha/tree-sitter-cmake")
-     (css "https://github.com/tree-sitter/tree-sitter-css")
-     (elisp "https://github.com/Wilfred/tree-sitter-elisp")
-     (go "https://github.com/tree-sitter/tree-sitter-go")
-     (html "https://github.com/tree-sitter/tree-sitter-html")
-     (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "master" "src")
-     (json "https://github.com/tree-sitter/tree-sitter-json")
-     (make "https://github.com/alemuller/tree-sitter-make")
-     (markdown "https://github.com/ikatyang/tree-sitter-markdown")
-     (python "https://github.com/tree-sitter/tree-sitter-python")
-     (toml "https://github.com/tree-sitter/tree-sitter-toml")
-     (astro "https://github.com/virchau13/tree-sitter-astro")
-     (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
-     (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
-     (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
-#+end_src
-
-
-** avy
-#+begin_src emacs-lisp
-(global-set-key (kbd "C-:") 'avy-goto-char)
-#+end_src
-
-** Astro Mode
-
-#+begin_src emacs-lisp
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; (use-package astro-ts-mode)                                                                                           ;;
 ;;                                                                                                                       ;;
@@ -310,9 +202,6 @@ Display the actual color as a background for any hex color value (ex. #ffffff). 
 ;;                     :add-on? t))                                                                                      ;;
 ;; )                                                                                                                     ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-#+end_src
-
-#+begin_src emacs-lisp
 
 ;; ;; WEB MODE
 ;; (use-package web-mode
@@ -338,37 +227,21 @@ Display the actual color as a background for any hex color value (ex. #ffffff). 
 ;;   ;; auto start eglot for astro-mode
 ;;   (add-hook 'astro-mode-hook 'eglot-ensure))
 
-#+end_src
-
-** Blade Mode
-#+begin_src emacs-lisp
 (define-derived-mode blade-mode web-mode "blade")
 
 (setq auto-mode-alist
       (append '((".*\\.blade.php\\'" . blade-mode))
               auto-mode-alist))
-#+end_src
 
-* Terminals
-** Multi-Vterm
-#+begin_src emacs-lisp
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; (use-package multi-vterm :ensure t) ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package multi-vterm :ensure t) ;;
+(use-package undo-fu-session
+ :config
+ (setq undo-fu-session-compression nil)
+ )
 
-(add-hook 'vterm-mode-hook 'evil-emacs-state)
-
-#+end_src
-
-* Undo Fu
-#+begin_src emacs-lisp
-   (use-package undo-fu-session
-    :config
-    (setq undo-fu-session-compression nil)
-    )
-#+end_src
-
-* Excalidraw
-#+begin_src emacs-lisp
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; (use-package org-excalidraw                                    ;;
 ;;   :config                                                      ;;
@@ -376,10 +249,6 @@ Display the actual color as a background for any hex color value (ex. #ffffff). 
 ;; )                                                              ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-#+end_src
-
-* Mermaid-Mode
-#+begin_src emacs-lisp
 (use-package ob-mermaid
   :config
   (setq ob-mermaid-cli-path "/home/bastian/.nvm/versions/node/v20.16.0/bin/mmdc")
@@ -395,10 +264,7 @@ Display the actual color as a background for any hex color value (ex. #ffffff). 
     '((mermaid . t)
       (scheme . t)
       (your-other-langs . t)))
-#+end_src
 
-* Mu4e
-#+begin_src emacs-lisp
 (after! mu4e
   (setq sendmail-program (executable-find "msmtp")
 	send-mail-function #'smtpmail-send-it
@@ -438,7 +304,7 @@ Display the actual color as a background for any hex color value (ex. #ffffff). 
                   (mu4e-sent-folder  . "/buchhaltung/[Gmail]/Gesendet")
                   (mu4e-refile-folder  . "/buchhaltung/[Gmail]/Alle Nachrichten")
                   (mu4e-trash-folder  . "/buchhaltung/[Gmail]/Papierkorb")
-                   (mu4e-compose-signature . "---\nBastian Henneberg\nHead of Development")))
+                  (mu4e-compose-signature . "---\nBastian Henneberg\nHead of Development")))
 
           ;; Peppermint account
           (make-mu4e-context
@@ -461,5 +327,3 @@ Display the actual color as a background for any hex color value (ex. #ffffff). 
       mu4e-compose-context-policy 'always-ask)
 
 )
-
-#+end_src
