@@ -22,7 +22,7 @@
 
 ;; Settings for Font Family and Size
 ;;(setq doom-font (font-spec :family "MesloLGL Nerd Font Mono" :size 16))
-(setq doom-font (font-spec :family "Fira Code Nerd Font Mono" :size 17))
+(setq doom-font (font-spec :family "Victor Mono" :size 17))
 
 (after! doom-themes
   (setq doom-themes-enable-bold t
@@ -151,6 +151,26 @@
 ;;   :init                                 ;;
 ;;   (setq lsp-tailwindcss-add-on-mode t)) ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(setq treesit-language-source-alist
+   '((bash "https://github.com/tree-sitter/tree-sitter-bash")
+     (cmake "https://github.com/uyha/tree-sitter-cmake")
+     (css "https://github.com/tree-sitter/tree-sitter-css")
+     (elisp "https://github.com/Wilfred/tree-sitter-elisp")
+     (go "https://github.com/tree-sitter/tree-sitter-go")
+     (html "https://github.com/tree-sitter/tree-sitter-html")
+     (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "master" "src")
+     (json "https://github.com/tree-sitter/tree-sitter-json")
+     (make "https://github.com/alemuller/tree-sitter-make")
+     (markdown "https://github.com/ikatyang/tree-sitter-markdown")
+     (python "https://github.com/tree-sitter/tree-sitter-python")
+     (toml "https://github.com/tree-sitter/tree-sitter-toml")
+     (astro "https://github.com/virchau13/tree-sitter-astro")
+     (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
+     (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
+     (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
+
+(global-set-key (kbd "C-:") 'avy-goto-char)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; (use-package astro-ts-mode)                                                                                           ;;
@@ -293,7 +313,7 @@
                   (mu4e-sent-folder  . "/buchhaltung/[Gmail]/Gesendet")
                   (mu4e-refile-folder  . "/buchhaltung/[Gmail]/Alle Nachrichten")
                   (mu4e-trash-folder  . "/buchhaltung/[Gmail]/Papierkorb")
-                  (mu4e-compose-signature . "---\nBastian Henneberg\nHead of Development")))
+                   (mu4e-compose-signature . "---\nBastian Henneberg\nHead of Development")))
 
           ;; Peppermint account
           (make-mu4e-context
