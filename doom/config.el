@@ -90,11 +90,6 @@
       )
 (add-to-list 'org-modules 'org-habit t)
 
-;; (setq org-todo-keyword-faces
-;;    '(("TODO"        . (:background "black"   :foreground "red"
-;;                        :weight bold))
-;; ))
-
 (after! org
   (setq org-agenda-files '("~/vaults/org/org-roam/habit/" "~/vaults/org/org-roam/list/" "~/vaults/org/org-roam/customer/"))
   (setq org-agenda-include-diary t)
@@ -126,7 +121,7 @@
          :target (file+head "%<%Y-%m-%d>.org" "%<%Y-%m-%d>\n"))
         ))
   (setq org-roam-capture-templates
-        '(("a" "workstuff" plain (file "~/vaults/org/org-roam/templates/customer.org")
+        '(("a" "customer" plain (file "~/vaults/org/org-roam/templates/customer.org")
         :target (file+head "customer/${slug}.org" "${title}\n") :unnarrowed t)
         ("b" "project" plain (file "~/vaults/org/org-roam/templates/project.org")
         :target (file+head "project/${slug}.org" "${title}\n") :unnarrowed t)
@@ -138,6 +133,8 @@
         :target (file+head "list/${slug}.org" "${title}\n") :unnarrowed t)
         ("c" "contact" plain (file "~/vaults/org/org-roam/templates/contact.org")
         :target (file+head "contact/${slug}.org" "${title}\n") :unnarrowed t)
+        ("e" "coding" plain (file "~/vaults/org/org-roam/templates/coding.org")
+        :target (file+head "coding/${slug}.org" "${title}\n") :unnarrowed t)
         ))
 )
 

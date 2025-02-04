@@ -50,4 +50,3 @@ report.next.labels=ID,Active,Age,D,P,Project,Tags,R,Sch,Due,Until,Description,Ur
 uda.taskwarrior-tui.shortcuts.1=~/dotfiles/taskwarrior-tui/taskopen-annotation.sh
 
 color=on
-context=work
