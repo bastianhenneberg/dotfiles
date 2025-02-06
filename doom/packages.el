@@ -50,3 +50,7 @@
 ;; (unpin! t)
 
 (package! catppuccin-theme)
+(package! ob-mermaid)
+
+(unpin! org-roam)
+(package! org-roam-ui)

@@ -91,6 +91,47 @@
 (add-to-list 'org-modules 'org-habit t)
 
 (after! org
+(setq org-cycle-separator-lines -1)
+(add-to-list 'org-capture-templates
+             '("Q" "Standard TODO Template" entry (file "~/vaults/org/org-roam/list/inbox.org")
+               "* TODO %^{Title} %^{ACTIVITIES}p %^{LOCATION}p %^{ENERGIE}p %^{DEVICE}p %^{SCORE}p
+:PROPERTIES:
+:END:
+"
+))
+
+;; Setting org Properties for my Notes System if the are not devined by the capture template
+(defun my-insert-snippet (activity location power device score)
+  "Insert snippet and move point."
+  (interactive "sEnter the Activity (appointment, planning, invoice, offer, call): \nsEnter the Location (home, office, everywhere): \nsEnter the Energie (low, medium, high): \nsEnter the Device (phone, computer, none): \nsEnter the Score (10, 25, 50, 75, 100): ")
+  (insert "\n:PROPERTIES:\n:ACTIVITIES: "
+      activity
+      "\n:LOCATION: "
+      location
+      "\n:ENERGIE: "
+      power
+      "\n:DEVICE: "
+      device
+      "\n:SCORE: " score "  \n:END:")
+  (backward-word 2))
+(global-set-key (kbd "C-x C-f") 'my-insert-snippet))
+
+(use-package! websocket
+    :after org-roam)
+
+(use-package! org-roam-ui
+    :after org-roam ;; or :after org
+;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
+;;         a hookable mode anymore, you're advised to pick something yourself
+;;         if you don't care about startup time, use
+;;  :hook (after-init . org-roam-ui-mode)
+    :config
+    (setq org-roam-ui-sync-theme t
+          org-roam-ui-follow t
+          org-roam-ui-update-on-save t
+          org-roam-ui-open-on-start t))
+
+(after! org
   (setq org-agenda-files '("~/vaults/org/org-roam/habit/" "~/vaults/org/org-roam/list/" "~/vaults/org/org-roam/customer/"))
   (setq org-agenda-include-diary t)
   (setq org-habit-show-all-today t)

@@ -3,6 +3,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(org-custom-properties nil)
+ '(org-global-properties '(("NEW_STUFF" . "test") ("PROJECT_ALL" . "termin")))
+ '(org-property-separators nil)
  '(package-selected-packages '(ob-rust org-modern multi-vterm ob-mermaid emmet-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
