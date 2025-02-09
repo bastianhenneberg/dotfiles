@@ -6,6 +6,13 @@
 ;; Prompt to delete autosaves when killing buffers.
 (setf kill-buffer-delete-auto-save-files t)
 
+  (setq org-link-frame-setup
+   '((vm . vm-visit-folder-other-frame)
+     (vm-imap . vm-visit-imap-folder-other-frame)
+     (gnus . org-gnus-no-new-news)
+     (file . find-file)
+     (wl . wl-other-frame)))
+
 ;; Package Manager Setup
 (require 'package)
 
@@ -174,7 +181,12 @@
     (setq evil-want-integration t)
     (evil-collection-init))
 
-;;; Leader
+;; Leader
+(with-eval-after-load 'evil-maps
+  (define-key evil-motion-state-map (kbd "SPC") nil)
+  (define-key evil-motion-state-map (kbd "RET") nil)
+  (define-key evil-motion-state-map (kbd "TAB") nil))
+
 (define-prefix-command 'my-leader-map)
 
 (keymap-set evil-motion-state-map "SPC" 'my-leader-map)
@@ -182,8 +194,6 @@
 
 (evil-define-key nil my-leader-map
     ;; füge hier deine Bindungen hinzu:
-    "bs"  'switch-to-buffer
-    "B"  'project-switch-to-buffer
     "bi" 'ibuffer
     "pf" 'project-find-file
     "ps" 'project-shell-command
@@ -265,6 +275,9 @@
       org-hide-emphasis-markers t
       org-log-done 'time
       org-startup-indented t
+      org-tags-column 0
+      ;; Enter to follow a Link
+      org-return-follows-link t
       org-startup-folded 'showall
       org-archive-location "~/vaults/org/archive/archive.org::)"
       )
@@ -276,9 +289,13 @@
 
 ;; Keywords
 (setq org-todo-keywords
-      '((sequence "TODO(t)" "FEEDBACK(f)" "VERIFY(v)" "|" "DONE(d)" "DELEGATED(D)")
+      '((sequence "TODO(t)" "WAIT(w)" "HOLD(h)" "MEET(t)" "CALL(c)" "MAIL(m)" "|" "DONE(D)" "DELEGATED(d)")
         (sequence "REPORT(r)" "BUG(b)" "KNOWNCAUSE(k)" "|" "FIXED(f)")
-        (sequence "|" "CANCELED(c)")))
+        (sequence "|" "CANCELED(C)")))
+
+(setq org-todo-keyword-faces
+      '(("TODO" . "#8aadf4") ("HOLD" . "#f5a97f") ("WAIT" . "#eed49f") ("MEET" . "#f5bde6") ("CALL" . "#8bd5ca") ("MAIL" . "#b7bdf8")
+        ("DONE" . "#a6da95") ("DELEGATED" . "#939ab7") ("CANCELED" . (:foreground "#ed8796" :weight bold))))
 
 ;; Properties
 
@@ -292,16 +309,14 @@
         ("j" "Journal" entry (file+datetree "~/org/journal.org")
          "* %?\nEntered on %U\n  %i\n  %a")
         ("Q" "Standard TODO Template" entry (file "~/vaults/org/org-roam/list/inbox.org")
-          "* TODO %^{Title} %^{ACTIVITIES}p %^{LOCATION}p %^{ENERGIE}p %^{DEVICE}p %^{SCORE}p :PROPERTIES: :END:")
+          "* TODO %^{Title} %^{LOCATION}p %^{ENERGIE}p %^{DEVICE}p %^{SCORE}p :PROPERTIES: :END:")
         ))
 
 ;; Setting org Properties for my Notes System if the are not devined by the capture template
-(defun my-insert-snippet (activity location power device score)
+(defun my-insert-snippet (location power device score)
   "Insert snippet and move point."
-  (interactive "sEnter the Activity (appointment, planning, invoice, offer, call): \nsEnter the Location (home, office, everywhere): \nsEnter the Energie (low, medium, high): \nsEnter the Device (phone, computer, none): \nsEnter the Score (10, 25, 50, 75, 100): ")
-  (insert "\n:PROPERTIES:\n:ACTIVITIES: "
-      activity
-      "\n:LOCATION: "
+  (interactive "sEnter the Location (home, office, everywhere): \nsEnter the Energie (low, medium, high): \nsEnter the Device (phone, computer, none): \nsEnter the Score (10, 25, 50, 75, 100): ")
+  (insert "\n:PROPERTIES:\n:LOCATION: "
       location
       "\n:ENERGIE: "
       power
@@ -312,7 +327,7 @@
 (global-set-key (kbd "C-x C-q") 'my-insert-snippet)
 
 ;; Org Agenda
-  (setq org-agenda-files '("~/vaults/org/org-roam/habit/" "~/vaults/org/org-roam/list/" "~/vaults/org/org-roam/customer/"))
+  (setq org-agenda-files '("~/vaults/org/org-roam/habit/" "~/vaults/org/org-roam/list/" "~/vaults/org/org-roam/customer/" "~/vaults/org/org-roam/peppermint_digital.org"))
   (setq org-agenda-include-diary t)
   (setq org-habit-show-all-today t)
   (setq org-habit-following-days 7
@@ -396,6 +411,16 @@
 (add-hook 'org-mode-hook
           (lambda ()
             (org-superstar-mode 1)))
+
+(use-package org-fancy-priorities
+  :ensure t
+  :hook
+  (org-mode . org-fancy-priorities-mode)
+  :config
+  (setq org-fancy-priorities-list '((?A . " ")
+                                  (?B . " ")
+                                  (?C . " "))))
+
 
 ;; Org Modern
  
