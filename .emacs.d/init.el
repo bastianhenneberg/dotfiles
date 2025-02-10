@@ -5,6 +5,7 @@
 (setf make-backup-files nil)
 ;; Prompt to delete autosaves when killing buffers.
 (setf kill-buffer-delete-auto-save-files t)
+(setq initial-buffer-choice "~/vaults/org/org-roam/index.org")
 
   (setq org-link-frame-setup
    '((vm . vm-visit-folder-other-frame)
@@ -12,6 +13,8 @@
      (gnus . org-gnus-no-new-news)
      (file . find-file)
      (wl . wl-other-frame)))
+
+(add-hook 'org-mode-hook 'display-line-numbers-mode)
 
 ;; Package Manager Setup
 (require 'package)
@@ -198,7 +201,7 @@
 (evil-define-key nil my-leader-map
     ;; füge hier deine Bindungen hinzu:
     "bi" 'ibuffer
-    "bd" 'evil-buffer-delete
+    "bd" 'evil-delete-buffer
     "pf" 'project-find-file
     "ps" 'project-shell-command
     "oA" 'org-agenda
