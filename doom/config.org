@@ -189,8 +189,12 @@ Display the actual color as a background for any hex color value (ex. #ffffff). 
       device
       "\n:SCORE: " score "  \n:END:")
   (backward-word 2))
-(global-set-key (kbd "C-x C-f") 'my-insert-snippet))
+;; (evil-define-key 'normal 'global (kbd "<leader>nz") 'my-insert-snippet))
+(global-set-key (kbd "C-q") 'my-insert-snippet))
 #+end_src
+
+#+RESULTS:
+: my-insert-snippet
 
 ** Org UI
 #+begin_src emacs-lisp

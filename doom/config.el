@@ -114,7 +114,8 @@
       device
       "\n:SCORE: " score "  \n:END:")
   (backward-word 2))
-(global-set-key (kbd "C-x C-f") 'my-insert-snippet))
+;; (evil-define-key 'normal 'global (kbd "<leader>nz") 'my-insert-snippet))
+(global-set-key (kbd "C-q") 'my-insert-snippet))
 
 (use-package! websocket
     :after org-roam)

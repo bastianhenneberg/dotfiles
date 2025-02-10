@@ -161,7 +161,10 @@
   (setq trashed-date-format "%Y-%m-%d %H:%M:%S"))
 
 
-(use-package undo-fu)
+(use-package undo-fu
+    :ensure t)
+(use-package undo-tree
+    :ensure t)
 
 ;; Setting up Evil Mode
 (use-package evil
@@ -172,10 +175,10 @@
     (setq evil-want-keybinding nil)
     (setq evil-undo-system 'undo-fu)
     :config
-    (evil-mode 1)
-    (evil-set-initial-state 'dired-mode 'emacs))
+    (evil-mode 1))
 
 (use-package evil-collection
+    :ensure t
     :after evil
     :config
     (setq evil-want-integration t)
@@ -195,6 +198,7 @@
 (evil-define-key nil my-leader-map
     ;; füge hier deine Bindungen hinzu:
     "bi" 'ibuffer
+    "bd" 'evil-buffer-delete
     "pf" 'project-find-file
     "ps" 'project-shell-command
     "oA" 'org-agenda
@@ -204,13 +208,23 @@
     "mci" 'org-clock-in
     "mco" 'org-clock-out
     "mp" 'org-priority
+    "mds" 'org-schedule
+    "mdd" 'org-deadline
+    "msv" 'org-cut-subtree
+    "msc" 'org-copy-subtree
     "nrf" 'org-roam-node-find
     "nn" 'org-capture
     "nrn" 'org-roam-capture
-    ;; usw.
+    "wh" 'evil-window-left
+    "wk" 'evil-window-down
+    "wl" 'evil-window-right
+    "ws" 'evil-window-new
+    "wv" 'evil-window-vnew
+    "wd" 'evil-window-delete
 )
 
 (evil-define-key 'insert minibuffer-local-map (kbd "<escape>") 'keyboard-escape-quit)
+
 
 ;; Setting up which-key
 (use-package which-key
@@ -289,12 +303,12 @@
 
 ;; Keywords
 (setq org-todo-keywords
-      '((sequence "TODO(t)" "WAIT(w)" "HOLD(h)" "MEET(t)" "CALL(c)" "MAIL(m)" "|" "DONE(D)" "DELEGATED(d)")
+      '((sequence "TODO(t)" "PROJ(p)" "WAIT(w)" "HOLD(h)" "MEET(x)" "CALL(c)" "MAIL(m)" "|" "DONE(D)" "DELEGATED(d)")
         (sequence "REPORT(r)" "BUG(b)" "KNOWNCAUSE(k)" "|" "FIXED(f)")
         (sequence "|" "CANCELED(C)")))
 
 (setq org-todo-keyword-faces
-      '(("TODO" . "#8aadf4") ("HOLD" . "#f5a97f") ("WAIT" . "#eed49f") ("MEET" . "#f5bde6") ("CALL" . "#8bd5ca") ("MAIL" . "#b7bdf8")
+      '(("TODO" . "#8aadf4") ("PROJ" . "#939ab7")  ("HOLD" . "#f5a97f") ("WAIT" . "#eed49f") ("MEET" . "#f5bde6") ("CALL" . "#8bd5ca") ("MAIL" . "#b7bdf8")
         ("DONE" . "#a6da95") ("DELEGATED" . "#939ab7") ("CANCELED" . (:foreground "#ed8796" :weight bold))))
 
 ;; Properties
@@ -304,11 +318,7 @@
 (setq org-cycle-separator-lines -1)
 
 (setq org-capture-templates
-      '(("t" "Todo" entry (file+headline "~/org/gtd.org" "Tasks")
-         "* TODO %?\n  %i\n  %a")
-        ("j" "Journal" entry (file+datetree "~/org/journal.org")
-         "* %?\nEntered on %U\n  %i\n  %a")
-        ("Q" "Standard TODO Template" entry (file "~/vaults/org/org-roam/list/inbox.org")
+      '(("Q" "Standard TODO Template" entry (file "~/vaults/org/org-roam/list/inbox.org")
           "* TODO %^{Title} %^{LOCATION}p %^{ENERGIE}p %^{DEVICE}p %^{SCORE}p :PROPERTIES: :END:")
         ))
 
@@ -400,6 +410,7 @@
 
 ;; Org TOC
   (use-package toc-org
+    :ensure t
     :commands toc-org-mode
     :init (add-hook 'org-mode-hook 'toc-org-enable))
 
