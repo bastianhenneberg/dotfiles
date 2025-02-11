@@ -230,6 +230,8 @@
     "wd" 'evil-window-delete
     "sg" 'find-grep
     "sf" 'find-file
+    "fp" 'my-insert-snippet
+    "ac" 'evil-avy-goto-char
 )
 
 (evil-define-key 'insert minibuffer-local-map (kbd "<escape>") 'keyboard-escape-quit)
@@ -316,9 +318,12 @@
 (use-package lsp-mode
     :ensure t)
 
+(use-package avy
+    :ensure t)
+
 (use-package rust-mode
   :ensure t)
-    
+
 (setq org-directory "~/vaults/org/"
       org-hide-emphasis-markers t
       org-log-done 'time
