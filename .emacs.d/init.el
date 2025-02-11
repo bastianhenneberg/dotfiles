@@ -113,21 +113,32 @@
   :hook (after-init . savehist-mode))
 
 (use-package corfu
-  :ensure t
-  :hook (after-init . global-corfu-mode)
-  :bind (:map corfu-map ("<tab>" . corfu-complete))
-  :config
-  (setq tab-always-indent 'complete)
-  (setq corfu-preview-current nil)
-  (setq corfu-min-width 20)
+    :custom
+    (corfu-cycle t)                 ; Allows cycling through candidates
+    (corfu-auto t)                  ; Enable auto completion
+    (corfu-auto-prefix 2)
+    (corfu-auto-delay 0.1)
+    (corfu-popupinfo-delay '(0.4 . 0.2))
+    (corfu-preview-current 'insert) ; Do not preview current candidate
+    (corfu-preselect-first nil)
+    (corfu-on-exact-match nil)      ; Don't auto expand tempel snippets
 
-  (setq corfu-popupinfo-delay '(1.25 . 0.5))
-  (corfu-popupinfo-mode 1) ; shows documentation after `corfu-popupinfo-delay'
+    :bind (:map corfu-map
+                ("M-SPC"      . corfu-insert-separator)
+                ("TAB"        . corfu-next)
+                ([tab]        . corfu-next)
+                ("S-TAB"      . corfu-previous)
+                ([backtab]    . corfu-previous)
+                ("S-<return>" . nil) ;; leave my entry as it is
+                ("RET"        . corfu-insert))
 
-  ;; Sort by input history (no need to modify `corfu-sort-function').
-  (with-eval-after-load 'savehist
-    (corfu-history-mode 1)
-    (add-to-list 'savehist-additional-variables 'corfu-history)))
+    :init
+       (global-corfu-mode)
+       (corfu-history-mode)
+       (corfu-popupinfo-mode) ; Popup completion info
+    )
+  (add-hook 'tex-mode-hook #'corfu-mode)
+  (add-hook 'LaTeX-mode-hook #'corfu-mode)
 
 ;; Tweaking dired file Manager
 (use-package dired
