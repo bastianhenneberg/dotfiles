@@ -139,6 +139,13 @@
     )
   (add-hook 'tex-mode-hook #'corfu-mode)
   (add-hook 'LaTeX-mode-hook #'corfu-mode)
+ 
+(use-package corfu-terminal
+      :ensure t)
+
+(unless (display-graphic-p)
+  (corfu-terminal-mode +1))
+
 
 ;; Tweaking dired file Manager
 (use-package dired
