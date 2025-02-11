@@ -215,6 +215,10 @@
     "mdd" 'org-deadline
     "msv" 'org-cut-subtree
     "msc" 'org-copy-subtree
+    "mod" 'org-do-demote
+    "mop" 'org-do-promote
+    "mol" 'org-toggle-link-display
+    "nri" 'org-roam-node-insert
     "nrf" 'org-roam-node-find
     "nn" 'org-capture
     "nrn" 'org-roam-capture
@@ -224,6 +228,8 @@
     "ws" 'evil-window-new
     "wv" 'evil-window-vnew
     "wd" 'evil-window-delete
+    "sg" 'find-grep
+    "sf" 'find-file
 )
 
 (evil-define-key 'insert minibuffer-local-map (kbd "<escape>") 'keyboard-escape-quit)
@@ -288,6 +294,31 @@
 (use-package org
   :ensure t)
 
+;; Org Remark
+(use-package org-remark
+  :ensure t)
+
+;; Org Mermaid
+(use-package mermaid-mode
+    :ensure t)
+
+(use-package mermaid-ts-mode
+    :ensure t)
+
+(use-package ob-mermaid
+  :ensure t)
+;; Installing mermaid-cli and set path to it
+(setq ob-mermaid-cli-path "~/.nvm/versions/node/v20.16.0/bin/mmdc")
+
+(use-package rustic
+    :ensure t)
+
+(use-package lsp-mode
+    :ensure t)
+
+(use-package rust-mode
+  :ensure t)
+    
 (setq org-directory "~/vaults/org/"
       org-hide-emphasis-markers t
       org-log-done 'time
@@ -299,6 +330,12 @@
       org-archive-location "~/vaults/org/archive/archive.org::)"
       )
 (add-to-list 'org-modules 'org-habit t)
+
+;; Source code native style
+(setq org-src-fontify-natively t
+    org-src-tab-acts-natively t
+    org-confirm-babel-evaluate nil
+    org-edit-src-content-indentation 0)
 
 ;; Setting Tap for org cycle to help in Terminal Mode
 (evil-define-key 'normal org-mode-map (kbd "TAB") #'org-cycle)
@@ -340,7 +377,7 @@
 (global-set-key (kbd "C-x C-q") 'my-insert-snippet)
 
 ;; Org Agenda
-  (setq org-agenda-files '("~/vaults/org/org-roam/habit/" "~/vaults/org/org-roam/list/" "~/vaults/org/org-roam/customer/" "~/vaults/org/org-roam/peppermint_digital.org"))
+  (setq org-agenda-files '("~/vaults/org/org-roam/habit/" "~/vaults/org/org-roam/list/" "~/vaults/org/org-roam/customer/" "~/vaults/org/org-roam/peppermint-digital.org"))
   (setq org-agenda-include-diary t)
   (setq org-habit-show-all-today t)
   (setq org-habit-following-days 7
@@ -435,6 +472,11 @@
                                   (?B . " ")
                                   (?C . " "))))
 
+;; Treesitter
+(use-package treesit-auto
+  :ensure t
+  :config
+  (global-treesit-auto-mode))
 
 ;; Org Modern
  
