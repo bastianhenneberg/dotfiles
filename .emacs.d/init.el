@@ -218,6 +218,7 @@
 
 (evil-define-key nil my-leader-map
     ;; füge hier deine Bindungen hinzu:
+    "b" '("buffer" . (keymap))
     "bi" 'ibuffer
     "bd" 'evil-delete-buffer
     "pf" 'project-find-file
