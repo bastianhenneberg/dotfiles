@@ -240,41 +240,41 @@
 (keymap-set evil-normal-state-map "SPC" 'my-leader-map)
 
 (evil-define-key nil my-leader-map
-  ;; füge hier deine Bindungen hinzu:
-  "bi" 'ibuffer
-  "bd" 'evil-delete-buffer
-  "pf" 'project-find-file
-  "ps" 'project-shell-command
-  "oA" 'org-agenda
-  "d" 'dired
-  "mt" 'org-todo
-  "mx" 'org-toggle-checkbox
-  "mci" 'org-clock-in
-  "mco" 'org-clock-out
-  "mp" 'org-priority
-  "mds" 'org-schedule
-  "mdd" 'org-deadline
-  "msv" 'org-cut-subtree
-  "msc" 'org-copy-subtree
-  "mod" 'org-do-demote
-  "mop" 'org-do-promote
-  "mol" 'org-toggle-link-display
-  "nri" 'org-roam-node-insert
-  "nrf" 'org-roam-node-find
-  "nn" 'org-capture
-  "nrn" 'org-roam-capture
-  "wh" 'evil-window-left
-  "wk" 'evil-window-down
-  "wl" 'evil-window-right
-  "ws" 'evil-window-new
-  "wv" 'evil-window-vnew
-  "wd" 'evil-window-delete
-  "sg" 'find-grep
-  "sf" 'find-file
-  "fp" 'my-insert-snippet
-  "ac" 'evil-avy-goto-char
-  "e" 'neotree-toggle
-  )
+    ;; füge hier deine Bindungen hinzu:
+    "b" '("buffer" . (keymap))
+    "bi" 'ibuffer
+    "bd" 'evil-delete-buffer
+    "pf" 'project-find-file
+    "ps" 'project-shell-command
+    "oA" 'org-agenda
+    "d" 'dired
+    "mt" 'org-todo
+    "mx" 'org-toggle-checkbox
+    "mci" 'org-clock-in
+    "mco" 'org-clock-out
+    "mp" 'org-priority
+    "mds" 'org-schedule
+    "mdd" 'org-deadline
+    "msv" 'org-cut-subtree
+    "msc" 'org-copy-subtree
+    "mod" 'org-do-demote
+    "mop" 'org-do-promote
+    "mol" 'org-toggle-link-display
+    "nri" 'org-roam-node-insert
+    "nrf" 'org-roam-node-find
+    "nn" 'org-capture
+    "nrn" 'org-roam-capture
+    "wh" 'evil-window-left
+    "wk" 'evil-window-down
+    "wl" 'evil-window-right
+    "ws" 'evil-window-new
+    "wv" 'evil-window-vnew
+    "wd" 'evil-window-delete
+    "sg" 'find-grep
+    "sf" 'find-file
+    "fp" 'my-insert-snippet
+    "ac" 'evil-avy-goto-char
+)
 
 (evil-define-key 'insert minibuffer-local-map (kbd "<escape>") 'keyboard-escape-quit)
 
