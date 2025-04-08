@@ -1,27 +1,44 @@
 -- If is in VSCode
 if vim.g.vscode then
-  -- Load custom modules
-  for _, file in ipairs(vim.fn.readdir(vim.fn.stdpath 'config' .. '/lua/user_functions', [[v:val =~ '\.lua$']])) do
-    require('user_functions.' .. file:gsub('%.lua$', ''))
-  end
+  -- VSCODE START
+  -- <leader> space key
+  vim.g.mapleader = ' '
 
-  -- Set up the Lazy plugin manager
-  local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
+  -- Keymaps for VSCode Extension
+  vim.cmd('nmap <leader>c :e ~/.config/nvim/init.lua<cr>')
+  vim.cmd('nmap k gk')
+  vim.cmd('nmap j gj')
+  vim.cmd('nmap <up> gk')
+  vim.cmd('nmap <down> gj')
+
+  -- sync System Clipboard
+  vim.opt.clipboard = 'unnamedplus'
+
+  -- Irgnore Search Case
+  vim.opt.ignorecase = true
+
+  -- Bootstrap lazy.nvim
+  local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
   if not (vim.uv or vim.loop).fs_stat(lazypath) then
-    local lazyrepo = 'https://github.com/folke/lazy.nvim.git'
-    local out = vim.fn.system { 'git', 'clone', '--filter=blob:none', '--branch=stable', lazyrepo, lazypath }
+    local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+    local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
     if vim.v.shell_error ~= 0 then
-      error('Error cloning lazy.nvim:\n' .. out)
+      vim.api.nvim_echo({
+        { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+        { out,                            "WarningMsg" },
+        { "\nPress any key to exit..." },
+      }, true, {})
+      vim.fn.getchar()
+      os.exit(1)
     end
   end
   vim.opt.rtp:prepend(lazypath)
 
   -- Set up plugins
   require('lazy').setup {
-    -- require 'plugins.lualine',
     require 'plugins.flash',
-    require 'plugins.comment',
   }
+  -- VSCODE END
 else
   require 'core.options' -- Load general options
   require 'core.keymaps' -- Load general keymaps
@@ -46,7 +63,6 @@ else
   -- Set up plugins
   require('lazy').setup {
     require 'plugins.neotree',
-    --  require 'plugins.colortheme',
     require 'plugins.snacks',
     require 'plugins.rust',
     require 'plugins.session',
@@ -66,7 +82,6 @@ else
     require 'plugins.gitsigns',
     require 'plugins.twilight',
     require 'plugins.flash',
-    --  require 'plugins.alpha',
     require 'plugins.indent-blankline',
     require 'plugins.misc',
     require 'plugins.comment',
