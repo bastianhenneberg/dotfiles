@@ -15,7 +15,7 @@
  '(org-done ((t (:inherit font-lock-comment-face :foreground "seagreen"))))
  '(org-hide ((t (:background "#24273a" :foreground "#24273a"))))
  '(org-indent ((t (:foreground "#24273a"))))
- '(org-level-1 ((t (:inherit outline-1 :extend t :foreground "darkturquoise" :height 1.15))))
+ '(org-level-1 ((t (:inherit outline-1 :extend t :foreground "#8bd5ca" :height 1.15))))
  '(org-level-2 ((t (:inherit outline-2 :height 1.1))))
  '(org-level-3 ((t (:inherit outline-3 :height 1.08))))
  '(org-level-4 ((t (:inherit outline-4 :height 1.06))))

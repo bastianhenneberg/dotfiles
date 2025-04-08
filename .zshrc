@@ -121,6 +121,8 @@ export NVM_DIR="$HOME/.nvm"
 PATH="$HOME/.config/emacs/bin:$PATH"
 PATH="$HOME/dotfiles/scripts:$PATH"
 export PATH="$HOME/.config/composer/vendor/bin:$PATH"
+export EDITOR=nvim
+export VISUAL=nvim
 
 alias tt="taskwarrior-tui"
 

@@ -142,6 +142,18 @@
   (setq org-log-into-drawer "LOGBOOK")
   )
 
+;; Keywords
+(after! org
+(setq org-todo-keywords
+      '((sequence "TODO(t)" "PROJ(p)" "WAIT(w)" "HOLD(h)" "MEET(x)" "CALL(c)" "MAIL(m)" "|" "DONE(D)" "DELEGATED(d)")
+        (sequence "REPORT(r)" "BUG(b)" "KNOWNCAUSE(k)" "|" "FIXED(f)")
+        (sequence "|" "CANCELED(C)")))
+
+(setq org-todo-keyword-faces
+      '(("TODO" . "#8aadf4") ("PROJ" . "#939ab7")  ("HOLD" . "#f5a97f") ("WAIT" . "#eed49f") ("MEET" . "#f5bde6") ("CALL" . "#8bd5ca") ("MAIL" . "#b7bdf8")
+        ("DONE" . "#a6da95") ("DELEGATED" . "#939ab7") ("CANCELED" . (:foreground "#ed8796" :weight bold))))
+)
+
 (use-package toc-org
   :commands toc-org-mode
   :init (add-hook 'org-mode-hook 'toc-org-enable))

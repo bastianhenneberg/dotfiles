@@ -18,6 +18,7 @@
   - [[#org-capture-template][Org Capture Template]]
   - [[#org-ui][Org UI]]
   - [[#org-agenda][Org Agenda]]
+  - [[#org-keywords][Org Keywords]]
   - [[#enabling-table-of-contents][Enabling table of contents]]
   - [[#org-roam][Org Roam]]
   - [[#org-level-headers][Org Level Headers]]
@@ -226,6 +227,21 @@ Display the actual color as a background for any hex color value (ex. #ffffff). 
         org-habit-show-habits t)
   (setq org-log-into-drawer "LOGBOOK")
   )
+#+end_src
+
+** Org Keywords
+#+begin_src emacs-lisp
+;; Keywords
+(after! org
+(setq org-todo-keywords
+      '((sequence "TODO(t)" "PROJ(p)" "WAIT(w)" "HOLD(h)" "MEET(x)" "CALL(c)" "MAIL(m)" "|" "DONE(D)" "DELEGATED(d)")
+        (sequence "REPORT(r)" "BUG(b)" "KNOWNCAUSE(k)" "|" "FIXED(f)")
+        (sequence "|" "CANCELED(C)")))
+
+(setq org-todo-keyword-faces
+      '(("TODO" . "#8aadf4") ("PROJ" . "#939ab7")  ("HOLD" . "#f5a97f") ("WAIT" . "#eed49f") ("MEET" . "#f5bde6") ("CALL" . "#8bd5ca") ("MAIL" . "#b7bdf8")
+        ("DONE" . "#a6da95") ("DELEGATED" . "#939ab7") ("CANCELED" . (:foreground "#ed8796" :weight bold))))
+)
 #+end_src
 
 ** Enabling table of contents
